@@ -1,10 +1,11 @@
 # basic options
 title: Roman Volodin
 author: Roman Volodin
-email: volodinroman1988@gmail.com
-description: My Blog
+# email: volodinroman1988@gmail.com
+# description: My Blog
 # twitter_username: jekyllrb
 github_username:  volodinroman
+vimeo_username: romanvolodincg
 
 # Build settings
 markdown: kramdown
