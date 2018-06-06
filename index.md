@@ -1,0 +1,90 @@
+---
+layout: default
+---
+
+<!-- about me -->
+<section id="mybackground" class="bg-white text-dark py-5">
+    <div class="container">
+        <h1 class="font-weight-light py-5">About me</h1>
+        <p class="mt-4">My name is Roman Volodin. Currently employed as a Senior Pipeline TD at Sony Pictures Imageworks, I'm solving day
+            to day production problems as quickly and efficiently as possible.</p>
+        <p>I am passionate about computer graphics and developing innovative technology, that I can apply in CG production pipeline.
+            My experience as a digital artist lends a great deal to my ability to communicate with production artists and
+            management on a level that is even more natural to their own workflow.</p>
+        <p>Always interested in programming, I entered Komsomolsk-on-Amur State Technical University in 2005 as a student of
+            Computation Technologies Faculty where besides regular programming I studied cryptography, web design and computational
+            geometry. In 2009 I entered a magistracy where the field of my study was computer graphics and multimedia. In
+            2011 I successfully graduated the magistracy where I got a M. Eng. degree.</p>
+        <p>Additionally, I enrolled a 3D Animation program at Seneca college in Toronto in 2013 that significantly helped me
+            to understand a film production pipeline and combine digital art and the power of programming in my projects
+            more effectively.</p>
+        <p>I see myself as a strong leader, good communicator and team player, and highly committed to my projects, while always
+            striving to experiment and learn new technique and technologies.</p>
+    </div>
+</section>
+
+<!-- Experience -->
+<section id="content" class=" bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 ">
+                <h4 class="text-black-60 font-weight-light text-uppercase">
+                    PROFESSIONAL EXPERIENCE
+                </h4>
+                <ul class="list-unstyled text-black-80">
+
+                    <li class="py-3">
+                        <h5 class="font-weight-bold">Senior Pipeline TD</h5>
+                        <p>Sony Pictures Imageworks / Canada, Vancouver / 2018 - present</p>
+                    </li>
+
+                    <li class="py-3">
+                        <h5 class="font-weight-bold">Technical Artist</h5>
+                        <p>Wargaming / Belarus, Minsk / 2014 - 2018</p>
+                    </li>
+
+                    <li class="py-3">
+                        <h5 class="font-weight-bold">Technical Director</h5>
+                        <p>Rune Entertainment / Canada, Toronto / 2013 - 2014</p>
+                    </li>
+
+                    <li class="py-3">
+                        <h5 class="font-weight-bold">Senior Developer / "1C" Trading Platform</h5>
+                        <p>Gross / Russia, Komsomolsk-on-Amur / 2011 - 2012</p>
+                    </li>
+
+                    <li class="py-3">
+                        <h5 class="font-weight-bold">C++ Developer / Web Designer</h5>
+                        <p>KNASTU / Russia, Komsomolsk-on-Amur / 2008 - 2011</p>
+                    </li>
+                </ul>
+                
+            </div>
+            <div class="col-12 col-md-6">
+                <h4 class="text-black-60 font-weight-light text-uppercase">
+                    MY TOOLS
+                </h4>
+
+                    <ul class="list-unstyled text-black-80">
+                    <li class="py-3">
+                        Maya, ZBrush, MudBox, Photoshop, Illustrator, Arnold, Marvelous Designer, Unity3D
+                    </li>
+                    <li class="py-3">
+                        Python, C++, C#, MayaAPI / MayaPythonAPI, QT / PyQt / PySide, MEL
+                    </li>
+                    <li class="py-3">
+                        HTML5, CSS3, Bootstrap4, PHP, SQLite, MySQL, JavaScript, JQuery
+                    </li>
+                    <li class="py-3">
+                        Microsoft Visual Studo, QtCreator / Designer, SublimeText3/Atom/VSCode, Chrome DevTools, XCode, CMake/Premake
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
