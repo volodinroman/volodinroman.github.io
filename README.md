@@ -3,3 +3,5 @@
 [![Jekyll](https://img.shields.io/badge/jekyll-%3E%3D%203.8.2-blue.svg)](https://jekyllrb.com/)
 
 Live version is available at: https://romanvolodin.com
+
+Feel free to use it as a template, I try adding more comments to get things understood better ;)
