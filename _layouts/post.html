@@ -1,0 +1,19 @@
+---
+layout: default
+---
+
+
+<section id="blog-posts" class="bg-dark text-white py-5">
+    <div class="container py-4">
+        <h1 class="post-title">{{ page.title }}</h1>
+        <h6 class="text-muted"> {{ page.date | date_to_long_string }}</h6>
+    </div>
+</section>
+
+<section id="blog-posts" class="bg-white text-dark py-5">
+    <div class="container fill-viewport-70">
+        <article class="post-content">
+            {{ content }}
+        </article>
+    </div>
+</section>
