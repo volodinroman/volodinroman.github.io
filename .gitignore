@@ -5,3 +5,4 @@ Gemfile
 _site
 *.gem
 .jekyll-metadata
+Gemfile
