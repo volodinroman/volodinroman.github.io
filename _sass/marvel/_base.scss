@@ -10,6 +10,10 @@ a:visited {text-decoration:none;color:inherit;}
 a:hover {text-decoration: none;color:inherit;}
 a:active {text-decoration: none;color:inherit;}
 
+.cursor-default:hover{
+    cursor: default !important;
+}
+
 /* disable glowing on inputs */
 .form-control:focus {
   box-shadow: none;
@@ -116,5 +120,8 @@ a:active {text-decoration: none;color:inherit;}
 .fa-flag:hover {
     color: #1abc9c;
 }
+
+
+/* BLOG */
 
 
