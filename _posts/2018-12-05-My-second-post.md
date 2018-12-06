@@ -3,7 +3,7 @@ layout: post
 title:  "My second Post"
 date:   2018-12-05 21:12:00 -0700
 categories: test
-tags: [test, jekyll, github]
+tags: [test, test2, test3]
 ---
 
 
