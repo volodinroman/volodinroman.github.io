@@ -21,7 +21,6 @@ github_username:  volodinroman
 
 
 # Build settings
-highlighter: pygments
 markdown: kramdown
 theme: minima
 plugins:
