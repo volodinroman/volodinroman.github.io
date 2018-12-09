@@ -10,10 +10,10 @@ tags: [test, jekyll, github]
 <!-- <section id="blog-posts" class="bg-white text-dark"> -->
   <!-- <div class="container fill-viewport-70 px-0"> -->
     
-  <figure class="figure">
+  <!-- <figure class="figure">
     <img src="{{ '/assets/img/test.jpg' | absolute_url }}" class="img-responsive w-100 pb-1" alt="Responsive image">
     <figcaption class="figure-caption text-center pb-5">A caption for the above image.</figcaption>
-  </figure>
+  </figure> -->
     
 
 
