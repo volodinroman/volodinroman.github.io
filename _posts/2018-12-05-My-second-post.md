@@ -7,8 +7,10 @@ tags: [test, test2, test3]
 ---
 
 
-<section id="blog-posts" class="bg-white text-dark py-5">
-    <div class="container fill-viewport-70 px-0">
+<!-- <section id="blog-posts" class="bg-white text-dark "> -->
+    <div class="container fill-viewport-70 px-0 ">
+
+    <img src="{{ '/assets/img/test.jpg' | absolute_url }}" class="img-fluid pb-5" alt="Responsive image">
 
 {% highlight python linenos %}
 from scipy import ndimage as nd
@@ -27,4 +29,4 @@ def main(x = 0):
     
 
 
-</section>
+<!-- </section> -->
