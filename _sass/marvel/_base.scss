@@ -1,3 +1,10 @@
+/* bootstrap */
+// @media (min-width: 1200px) {
+//     .container {
+//       width: 1000px;
+//     }
+//   }
+
 body, html{
     /* line-height: 1.8; */
     font-family: 'Open Sans', sans-serif;
@@ -92,6 +99,8 @@ a:active {text-decoration: none;color:inherit;}
 
 
 
+
+
 /* HEADER */
 
 .navbar-brand{
@@ -131,10 +140,14 @@ a:active {text-decoration: none;color:inherit;}
 
 /* BLOG */
 
-#blog-posts .post-list-title:hover{
+#blog-posts .post-list-item:hover .post-list-title{
     color: #1abc9c !important;
 }
 
 #blog-posts .text-green{
     color: #1abc9c !important;
+}
+
+.post-content p{
+    font-size: 1.1em;
 }

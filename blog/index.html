@@ -2,24 +2,40 @@
 layout: default
 ---
 
-<!-- {{ post.excerpt }} -->
 
-<!-- about me -->
+
 <section id="blog-posts" class="bg-white text-dark py-5">
-    <div class="container fill-viewport-70 px-0">
+    <div class="container fill-viewport-70 ">
 
-        <!-- post list -->
+        <!-- post index -->
         <ul class="list-unstyled">
+
+            <!-- for each post -->
             {% for post in site.posts %}
             <li class="my-5">
-                <a class="text-dark post-list-title" href="{{ post.url }}"><h4>{{ post.title }}</h4></a>
-                
-                <ul class="list-inline">
-                    <li class="list-inline-item"><h6><small>{{ post.date | date_to_long_string }}</small></h6></li>
-                    {% for tag in post.tags%}
-                        <li class="list-inline-item text-green cursor-default"><h6><small>#{{tag}}</small></h6></li>
-                    {% endfor %}
-                </ul>
+
+                <div class="row post-list-item">
+                    <!-- middle column takes less space than the container class originally does -->
+                    <div class="col-0 col-xl-1"></div> 
+                    <div class="col-12 col-xl-10">
+
+                            <!-- banner image -->
+                            {{ post.excerpt }}
+
+                            <!-- title -->
+                            <a class="text-dark post-list-title" href="{{ post.url }}"><h4>{{ post.title }}</h4></a>
+                            
+                            <!-- date and tags -->
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><h6><small>{{ post.date | date_to_long_string }}</small></h6></li>
+                                {% for tag in post.tags%}
+                                    <li class="list-inline-item text-green cursor-default"><h6><small>#{{tag}}</small></h6></li>
+                                {% endfor %}
+                            </ul>
+                            
+                    </div>
+                    <div class="col-0 col-xl-1"></div>
+                </div>
                 
             </li>
             {% endfor %}

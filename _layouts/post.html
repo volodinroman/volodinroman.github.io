@@ -3,10 +3,9 @@ layout: default
 ---
 
 
-<section id="blog-posts" class="bg-white text-dark py-5">
-    <div class="container">
+<section id="blog-posts-title" class="bg-white text-dark py-5">
+    <div class="container pt-5">
         <h1 class="post-title text-center py-2">{{ page.title }}</h1>
-        <!-- <h6 class="text-muted text-center"> {{ page.date | date_to_long_string }}</h6> -->
         <ul class="list-inline text-center">
             <li class="list-inline-item text-muted"><h6>{{ page.date | date_to_long_string }}</h6></li>
             {% for tag in page.tags%}
@@ -16,10 +15,16 @@ layout: default
     </div>
 </section>
 
-<section id="blog-posts" class="bg-white text-dark py-5">
-    <div class="container fill-viewport-70 pb-5">
-        <article class="post-content">
-            {{ content }}
-        </article>
+<section id="blog-posts-content" class="bg-white text-dark py-5">
+    <div class="container post-content  fill-viewport-70 pb-5">
+        <!-- <article class="post-content"> -->
+            
+            <div class="row">
+                <div class="col-0"></div>
+                <div class="col-12">{{ content }}</div>
+                <div class="col-0 "></div>
+            </div>
+          
+        <!-- </article> -->
     </div>
 </section>
