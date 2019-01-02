@@ -178,5 +178,7 @@ Adding shadow didn't take too much time as it was similar to the coloring proced
   </a>
 </figure>
 
+<div class="fb-share-button" data-href="https://romanvolodin.com/test/2018/12/05/Poly-Maker.html" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fromanvolodin.com%2Ftest%2F2018%2F12%2F05%2FPoly-Maker.html&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+
 
 
