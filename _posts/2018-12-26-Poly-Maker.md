@@ -15,7 +15,7 @@ tags: [python, pyqt, qt, math]
  <!--more-->
 
 <p class="pt-4">
-  Here is my new Poly Maker 2D tool that actually does nothing important and unfortunately doesn't change people's life. But! It was fun to write it and play with results. Inspired by <a target="_blank" class="text-info" href="http://lab.aerotwist.com/canvas/poly-maker/">Poly Maker</a> tool written by Paul Lewis. I believe the original tool was written with JavaScripts and WebGL. As there were no sources, I decided to write my own real time version with Python and PyQt. So fork it, break it or improve it if you wish.
+  Here is my new Poly Maker 2D tool that actually does nothing important and unfortunately doesn't change people's life. But! It was fun to write it and play with results. Inspired by <a target="_blank" class="text-info" href="http://lab.aerotwist.com/canvas/poly-maker/"><b>Poly Maker</b></a> tool written by Paul Lewis. I believe the original tool was written with JavaScripts and WebGL. As there were no sources, I decided to write my own real time version with Python and PyQt. So fork it, break it or improve it if you wish.
 </p>
 
 <a target = "_blank" href="https://github.com/volodinroman/PyPoly2d">
@@ -30,7 +30,7 @@ tags: [python, pyqt, qt, math]
 </figure>
 
 <p>
-A Bezier curve is a parametric curve that is used in computer graphics to draw procedural shapes. It is based on some entry data - some start points that are used to calculate all in-betweens. So I started with 4 points manually placed on the canvas. There are different ways to create a Bezier curve, I created a cubic one where minimum 4 points define the curve and the curve just passes through the first and the last points. The whole Bezier curve description can be found <a target="_blank" class="text-info" href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">here</a>, but if you want to save your time, here are the equations that help you calculate a Bezier curve points cordinates.
+A Bezier curve is a parametric curve that is used in computer graphics to draw procedural shapes. It is based on some entry data - some start points that are used to calculate all in-betweens. So I started with 4 points manually placed on the canvas. There are different ways to create a Bezier curve, I created a cubic one where minimum 4 points define the curve and the curve just passes through the first and the last points. The whole Bezier curve description can be found <a target="_blank" class="text-info" href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve"><b>here</b></a>, but if you want to save your time, here are the equations that help you calculate a Bezier curve points cordinates.
 </p>
 
 <figure class="figure text-center py-4" style="display: block;">
@@ -49,7 +49,7 @@ A Bezier curve is a parametric curve that is used in computer graphics to draw p
 </figure>
 
 <p>
-Here is a Python implementation of these equations.
+The following code is a Python implementation of these equations.
 </p>
 
 <div class="py-4">
@@ -99,7 +99,7 @@ The next step was creation of perpendicular points. This is an important step as
 <h3 class="my-5">Delauney triangulation</h3>
 
 <p>
-In order to connect points into triangles I used <b class="text-info">matplotlib</b> module that has everything we need to calculate a set of triangles using the given set of points. It uses Delauney algorithm and works pretty fast. 
+In order to connect points into triangles I used <a target="_blank" class="text-info" href="https://matplotlib.org/api/tri_api.html"><b>matplotlib</b></a> module that has everything we need to calculate a set of triangles using the given set of points. It uses <a target="_blank" class="text-info" href="https://en.wikipedia.org/wiki/Delaunay_triangulation"><b>Delauney triangulation</b></a> algorithm and works pretty fast. 
 </p>
 
 <div class="py-4">
@@ -151,7 +151,7 @@ def paint(self, painter, QStyleOptionGraphicsItem, widget=None):
 <h3 class="my-5">Coloring the polygons</h3>
 
 <p>
-For coloring the polygons the first thing I did was adding some color gradient based on the Y coordinates of each triangle's centroid. It worked but I wanted something more advanced like grabbing colors from a random image. So I googled some samples and found a few interesting ones. In order to be able to recalculate triangles colors when I move my control points I decided to use a <b class="text-info">QPixmap</b> and <b class="text-info">QImage</b> classes. First thing I did was calculating the width and the height of my lowpoly mesh and resize a given image so it's size could match the size of the mesh. Next thing was mapping triangles centroids coordinates to the image so I could grab a pixel color. Then I used this color as a brush color for painting polygons. And it worked. If you run the project and set any image - you will see how colors of the polygons are changing when we move Control Points.
+For coloring the polygons the first thing I did was adding some color gradient based on the Y coordinates of each triangle's centroid. It worked but I wanted something more advanced like grabbing colors from a random image. So I googled some samples and found a few interesting ones. In order to be able to recalculate triangles colors when I move my control points I decided to use a <a target="_blank" class="text-info" href="http://doc.qt.io/qt-5/qpixmap.html"><b>QPixmap</b></a> and <a target="_blank" class="text-info" href="http://doc.qt.io/qt-5/qimage.html"><b>QImage</b></a> classes. First thing I did was calculating the width and the height of my lowpoly mesh and resize a given image so it's size could match the size of the mesh. Next thing was mapping triangles centroids coordinates to the image so I could grab a pixel color. Then I used this color as a brush color for painting polygons. And it worked. If you run the project and set any image - you will see how colors of the polygons are changing when we move Control Points.
 </p>
 
 <figure class="figure  py-5">
