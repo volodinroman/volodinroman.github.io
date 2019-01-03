@@ -19,7 +19,7 @@ tags: [python, pyqt, qt, math]
 </p>
 
 <a target = "_blank" href="https://github.com/volodinroman/PyPoly2d">
-  <button type="button" class="btn btn-dark">GitHub Project</button>
+  <button type="button" class="btn btn-dark my-5">GitHub Project</button>
 </a>
 
 <h3 class="mt-5 mb-4">Bezier curve</h3>
