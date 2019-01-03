@@ -30,9 +30,8 @@ tags: [python, pyqt, qt, math]
 </figure>
 
 <p>
-Bezier curve was the easiest part as math that goes behind it is not really hard to understand and implement into code. As bezier curve is procedural, it is based on some entry data - some start points that are used to calculate all in-betweens. So I started with 4 points manually placed on the canvas. There are different ways to create a Bezier curve, I created a cubic one where minimum 4 points define the curve and the curve just passes through the first and the last points. The whole Bezier curve description can be found  <a target="_blank" class="text-info" href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">here</a>, but if you want to save your time, here are the equations that help you calculate a Bezier curve points cordinates.
+A Bezier curve is a parametric curve that is used in computer graphics to draw procedural shapes. It is based on some entry data - some start points that are used to calculate all in-betweens. So I started with 4 points manually placed on the canvas. There are different ways to create a Bezier curve, I created a cubic one where minimum 4 points define the curve and the curve just passes through the first and the last points. The whole Bezier curve description can be found <a target="_blank" class="text-info" href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve">here</a>, but if you want to save your time, here are the equations that help you calculate a Bezier curve points cordinates.
 </p>
-
 
 <figure class="figure text-center py-4" style="display: block;">
   <img src="{{ '/assets/img/blog/polyMaker/01.svg' | absolute_url }}" class="pb-1" alt="Responsive image">
@@ -88,8 +87,9 @@ def bezierCurve(n, points):
 <h3 class="my-4">Perpendicular points</h3>
 
 <p>
-The next step was creation of perpendicular points. This is an important step as it gives us a grid of points that will be used for Delauney triangulation algorithm. This step was also easy to implement ... actually the whole project is not hard at all, especially if you keep data structures well organized. My tool works in real time, that means when you move any control point, you will get the whole polymesh recalculated. Every time we move our CPs (pink squared dots), all perpendicular points should be recalculated. And this is where Linear Algebra helps. I just turned Bezier curve line segments into 3d vectors and found cross-products for each of those vectors and a vector <b>B = [0,0,1]</b> that points right to us from the screen. Then I normalized calculated perpendicular vectors and used them to offset a newly added points.
+The next step was creation of perpendicular points. This is an important step as it gives us a grid of points that will be used for Delauney triangulation algorithm. The tool works in real time, that means when you move any control point, you will get the whole polymesh recalculated. Every time we move our CPs (pink squared dots), all perpendicular points should be recalculated. And this is where Linear Algebra helps. I just turned Bezier curve line segments into 3d vectors and found cross-products for each of those vectors and a vector <b>B = [0,0,1]</b> that points right to us from the screen. Then I normalized calculated perpendicular vectors and used them to offset a newly added points.
 </p>
+
 
 <figure class="figure  py-4">
   <img src="{{ '/assets/img/blog/polyMaker/03.jpg' | absolute_url }}" class="img-fluid w-100 pb-1" alt="Responsive image">
@@ -99,7 +99,7 @@ The next step was creation of perpendicular points. This is an important step as
 <h3 class="my-5">Delauney triangulation</h3>
 
 <p>
-Delauney triangulation was the easiest part... why? because I decided it would be smart to use what has already been done by other people :D. So I used <b>matplotlib</b> module that has everything we need to calculate set of triangles using the given set of points. It uses Delauney algorithm. Here is a code snippet:
+In order to connect points into triangles I used <b class="text-info">matplotlib</b> module that has everything we need to calculate a set of triangles using the given set of points. It uses Delauney algorithm and works pretty fast. 
 </p>
 
 <div class="py-4">
@@ -151,7 +151,7 @@ def paint(self, painter, QStyleOptionGraphicsItem, widget=None):
 <h3 class="my-5">Coloring the polygons</h3>
 
 <p>
-Everything looks simple if you know how it's done. The same was with coloring triangles (or polygons). First thing I did was adding some color gradient based on the Y coordinates of each triangle's centroid. It worked but I wanted something more advanced like grabbing colors from a random image. So I googled some samples and found a few interesting ones. In order to be able to recalculate triangles colors when I move my control points I decided to use a <b>QPixmap</b> and <b>QImage</b> classes. First thing I did was calculating the width and the height of my lowpoly mesh and resize a given image so it's size could match the size of the mesh. Next thing was mapping triangles centroids coordinates to the image so I could grab a pixel color. Then I used this color as a brush color for painting polygons. And it worked. If you run the project and set any image - you will see how colors of the polygons are changing when we move Control Points.
+For coloring the polygons the first thing I did was adding some color gradient based on the Y coordinates of each triangle's centroid. It worked but I wanted something more advanced like grabbing colors from a random image. So I googled some samples and found a few interesting ones. In order to be able to recalculate triangles colors when I move my control points I decided to use a <b class="text-info">QPixmap</b> and <b class="text-info">QImage</b> classes. First thing I did was calculating the width and the height of my lowpoly mesh and resize a given image so it's size could match the size of the mesh. Next thing was mapping triangles centroids coordinates to the image so I could grab a pixel color. Then I used this color as a brush color for painting polygons. And it worked. If you run the project and set any image - you will see how colors of the polygons are changing when we move Control Points.
 </p>
 
 <figure class="figure  py-5">
