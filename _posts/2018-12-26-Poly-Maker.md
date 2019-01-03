@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Poly Maker 2D with Python and PyQt"
-date:   2018-12-04 21:12:00 -0700
+date:   2018-12-26 21:12:00 -0700
 categories: test
 tags: [python, pyqt, qt, math]
 ---
@@ -101,38 +101,6 @@ The next step was creation of perpendicular points. This is an important step as
 <p>
 In order to connect points into triangles I used <a target="_blank" class="text-info" href="https://matplotlib.org/api/tri_api.html"><b>matplotlib</b></a> module that has everything we need to calculate a set of triangles using the given set of points. It uses <a target="_blank" class="text-info" href="https://en.wikipedia.org/wiki/Delaunay_triangulation"><b>Delauney triangulation</b></a> algorithm and works pretty fast. 
 </p>
-
-<div class="py-4">
-{% highlight python  linenos%}
-from matplotlib.tri import Triangulation
-
-# this part of the code is a class method 
-_x = []
-_y = []
-
-for i in self._gridCoords: #self._gridCoords = [ [x,y], [x,y], ...]
-    _x.append(i[0])
-    _y.append(i[1])
-
-tri = Triangulation(_x, _y)
-
-# here is how the "tri" attribute is used to draw lines in QGraphicsItem class
-def paint(self, painter, QStyleOptionGraphicsItem, widget=None):
-
-    # _points = [[x,y], [x,y], [x,y], ...]
-
-    for i in tri:
-        # "i" is a set of points indices that makes a triangle
-        p0 = _points[i[0]] 
-        p1 = _points[i[1]]
-        p2 = _points[i[2]]
-
-        painter.drawLine(QtCore.QLineF(p0[0], p0[1], p1[0], p1[1]))
-        painter.drawLine(QtCore.QLineF(p1[0], p1[1], p2[0], p2[1]))
-        painter.drawLine(QtCore.QLineF(p0[0], p0[1], p2[0], p2[1]))
-
-{% endhighlight %}
-</div>
 
 <figure class="figure  py-3">
   <img src="{{ '/assets/img/blog/polyMaker/04.jpg' | absolute_url }}" class="img-fluid w-100 pb-1" alt="Responsive image">
