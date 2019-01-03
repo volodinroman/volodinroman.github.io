@@ -128,7 +128,7 @@ For coloring the polygons the first thing I did was adding some color gradient b
 </figure>
 
 <p>
-Adding shadow didn't take too much time as it was similar to the coloring procedure. I just calculated the width of the lowpoly mesh and resized my <b>QGraphicsPixmapItem</b> object that keeps a reference to the shadow image file. The height of the shadow is fixed and positioned at the fixed Y position.
+Adding shadow didn't take too much time as it was similar to the coloring procedure. I've just calculated the width of the lowpoly mesh and resized my <a target="_blank" class="text-info" href="http://doc.qt.io/archives/qt-4.8/qgraphicspixmapitem.html"><b>QGraphicsPixmapItem</b></a> object that keeps a reference to the shadow image file. The height of the shadow is fixed and positioned at the fixed Y position.
 <p>
 
 <figure class="figure  py-5">
