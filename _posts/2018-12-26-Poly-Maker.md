@@ -3,7 +3,7 @@ layout: post
 title:  "Poly Maker 2D with Python and PyQt"
 date:   2018-12-26 21:12:00 -0700
 categories: test
-tags: [python, pyqt, qt, math]
+tags: [Python, PyQt, Qt, Math]
 ---
 
 <!-- Post Banner -->

@@ -141,11 +141,17 @@ a:active {text-decoration: none;color:inherit;}
 /* BLOG */
 
 #blog-posts .post-list-item:hover .post-list-title{
-    color: #1abc9c !important;
+    color: #2473ce !important;
+    text-decoration: underline;
 }
 
 #blog-posts .text-green{
     color: #1abc9c !important;
+}
+
+#blog-posts .font-computer{
+    font-family: "Courier New",Consolas,Courier,monospace;
+    color: #707070 !important;
 }
 
 .post-content p{
