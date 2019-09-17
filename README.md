@@ -6,7 +6,7 @@
 
 Live version is available at: https://romanvolodin.com
 
-Feel free to use it as a template, I try adding more comments to get things understood better ;)
+Feel free to use it as a template ;)
 
 Extra resources:
 ----------------
