@@ -9,7 +9,7 @@ tags: [Python, PyQt, Qt, Math]
 <!-- Post Banner -->
 <figure class="figure">
   <a href="{{page.url | absolute_url}}">
-  <img src="{{ '/assets/img/blog/polyMaker/banner.webp' | absolute_url }}" class="img-fluid w-100 pb-1" alt="Responsive image">
+  <img src="{{ '/assets/img/blog/polyMaker/banner.jpg' | absolute_url }}" class="img-fluid w-100 pb-1" alt="Responsive image">
   </a>
 </figure>
  <!--more-->
