@@ -15,7 +15,7 @@ tags: [Python, PyQt, Qt, Math]
  <!--more-->
 
 <p class="pt-4">
-  Here is my new Poly Maker 2D tool that actually does nothing important and unfortunately doesn't change people's life. But! It was fun to write it and play with results. Inspired by <a target="_blank" class="text-info" href="http://lab.aerotwist.com/canvas/poly-maker/"><b>Poly Maker</b></a> tool written by Paul Lewis. I believe the original tool was written with JavaScripts and WebGL. As there were no sources, I decided to write my own real time version with Python and PyQt. So fork it, break it or improve it if you wish.
+  Here is my new Poly Maker 2D tool that actually does nothing important and unfortunately doesn't change people's life. But! It was fun to write it and play with results. Inspired by <a target="_blank" class="text-info" href="https://aerotwist.com/lab/poly-maker/"><b>Poly Maker</b></a> tool written by Paul Lewis. I believe the original tool was written with JavaScripts and WebGL. As there were no sources, I decided to write my own real time version with Python and PyQt. So fork it, break it or improve it if you wish.
 </p>
 
 <a target = "_blank" href="https://github.com/volodinroman/PyPoly2d">
