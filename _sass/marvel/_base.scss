@@ -71,6 +71,11 @@ a:active {text-decoration: none;color:inherit;}
 
 
 /* Utilities */
+
+.w-40{
+    max-width: 40%;
+}
+
 .fill-viewport {
   min-height: 100vh;
 }
@@ -100,7 +105,11 @@ a:active {text-decoration: none;color:inherit;}
     color: #707070;
 }
 
-
+/* Bootstrap images */
+figcaption{
+    padding-top: 1em;
+    color: #999999;
+}
 
 
 
@@ -126,10 +135,10 @@ a:active {text-decoration: none;color:inherit;}
 .copyright{
     font-size: .8rem;
 }
-
+ 
 .copyright:before{
 	color: #5d5d5d;
-    content: "©2020 Roman Volodin ";
+    content: "©2021 Roman Volodin ";
 }
 
 .social-wrapper{

@@ -5,4 +5,7 @@ Gemfile
 _site
 *.gem
 .jekyll-metadata
+.vscode
+.idea
+.archive
 
