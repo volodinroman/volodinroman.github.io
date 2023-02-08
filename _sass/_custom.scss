@@ -1,13 +1,16 @@
 /* bootstrap */
 @media (min-width: 1200px) {
     .container {
-      width: 1237px;
+      width: 1200px;
     }
   }
 
 body, html{
     /* line-height: 1.8; */
-    font-family: 'Open Sans', sans-serif;
+    // font-family: 'Open Sans', sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
+    // font-family: 'Neue Plak', sans-serif;
+    
     height: 100%;
 }
 
@@ -21,6 +24,8 @@ a:active {text-decoration: none;color:inherit;}
     cursor: default !important;
 }
 
+
+
 /* disable glowing on inputs */
 .form-control:focus {
   box-shadow: none;
@@ -29,7 +34,7 @@ a:active {text-decoration: none;color:inherit;}
     cursor: pointer;
 }
 
-/* BG Presets */
+/* Modifiers */
 .bg-1 { 
     background-color: #1abc9c; /* Green */
     color: #ffffff;
@@ -68,9 +73,6 @@ a:active {text-decoration: none;color:inherit;}
     border: rgba(255,255,255,0.5) solid 0px !important;
     border-top-width: 1px !important;
 }
-
-
-/* Utilities */
 
 .w-40{
     max-width: 40%;
@@ -118,6 +120,10 @@ figcaption{
 .navbar-brand{
     font-size:26px;
     font-weight: 300;
+    color: black;
+}
+.navbar-brand:hover{
+    color: white !important;
 }
 
 .navbar {
@@ -129,6 +135,9 @@ figcaption{
     color: #fff !important;
 }
 
+// .navbar-toggler {
+//     background-color: rgb(79, 79, 79);
+// }
 
 
 /* FOOTER */
@@ -138,7 +147,8 @@ figcaption{
  
 .copyright:before{
 	color: #5d5d5d;
-    content: "©2022 Roman Volodin ";
+    content: "© 2023 Roman Volodin";
+    font-size: 14px;
 }
 
 .social-wrapper{

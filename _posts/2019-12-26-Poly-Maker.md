@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Poly Maker 2D with Python and PyQt"
+title:  "2D Poly Maker in Python & PyQt"
 date:   2019-12-26 21:12:00 -0700
-categories: test
+categories: projects
 tags: [Python, PyQt, Qt, Math]
 ---
 
@@ -15,7 +15,7 @@ tags: [Python, PyQt, Qt, Math]
  <!--more-->
 
 <p class="pt-4">
-  Here is my new Poly Maker 2D tool that actually does nothing important and unfortunately doesn't change people's life. But! It was fun to write it and play with results. Inspired by <a target="_blank" class="text-info" href="https://aerotwist.com/lab/poly-maker/"><b>Poly Maker</b></a> tool written by Paul Lewis. I believe the original tool was written with JavaScripts and WebGL. As there were no sources, I decided to write my own real time version with Python and PyQt. So fork it, break it or improve it if you wish.
+  Here is one of my creations, the <b>Poly Maker 2D</b> tool. While it may not have any significant impact or improve anyone's daily life, the process of creating it was enjoyable and fulfilling. I was inspired by Paul Lewis' original <a target="_blank" class="text-info" href="https://aerotwist.com/lab/poly-maker/"><b>Poly Maker</b></a> tool, which was written using JavaScripts and WebGL. However, as the source code was not available, I decided to take on the challenge and build my own real-time version using Python and PyQt. Feel free to fork, modify, or enhance the code as you see fit.
 </p>
 
 <a target = "_blank" href="https://github.com/volodinroman/PyPoly2d">
@@ -30,7 +30,7 @@ tags: [Python, PyQt, Qt, Math]
 </figure>
 
 <p>
-A Bezier curve is a parametric curve that is used in computer graphics to draw procedural shapes. It is based on some entry data - some start points that are used to calculate all in-betweens. So I started with 4 points manually placed on the canvas. There are different ways to create a Bezier curve, I created a cubic one where minimum 4 points define the curve and the curve just passes through the first and the last points. The whole Bezier curve description can be found <a target="_blank" class="text-info" href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve"><b>here</b></a>, but if you want to save your time, here are the equations that help you calculate a Bezier curve points cordinates.
+  In computer graphics, a Bezier curve is a powerful tool for creating procedural shapes. It works by using entry data, such as starting points, to calculate all the in-between points. To get started, I placed 4 points manually on the canvas. There are various ways to create a Bezier curve, but I went with a cubic one, which requires a minimum of 4 points to define the curve and passes through the first and last points. For a more in-depth explanation of Bezier curves, you can check out this <a target="_blank" class="text-info" href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve"><b>resource</b></a>. But if you want to save your time, the equations to calculate the coordinates of a Bezier curve points are presented below.
 </p>
 
 <figure class="figure text-center py-4" style="display: block;">
@@ -84,16 +84,15 @@ def bezierCurve(n, points):
 {% endhighlight %}
 </div>
 
-<h3 class="my-4">Perpendicular points</h3>
+<h3 class="my-4">Grid points</h3>
 
 <p>
-The next step was creation of perpendicular points. This is an important step as it gives us a grid of points that will be used for Delauney triangulation algorithm. The tool works in real time, that means when you move any control point, you will get the whole polymesh recalculated. Every time we move our CPs (pink squared dots), all perpendicular points should be recalculated. And this is where Linear Algebra helps. I just turned Bezier curve line segments into 3d vectors and found cross-products for each of those vectors and a vector <b>B = [0,0,1]</b> that points right to us from the screen. Then I normalized calculated perpendicular vectors and used them to offset a newly added points.
+Before generating polygons along the curve, we generate a set of points placed along the curve normals. This step is crucial as it establishes a grid of points that will serve as the foundation for our Delaunay triangulation algorithm. The tool works in real-time, allowing for dynamic adjustments to be made. Whenever we move a control point (represented by pink squares), all the grid points are recalculated. This is where linear algebra comes into play. To find normal vectors in each segment point of our Bezier curve, I calculated a cross-product of <b>Tangent</b> vectors (the lines between points) and <b>Up</b> vector <i>[0,0,1]</i>. The resulting vectors were normalized. Then I generated points along the normals (on both sides of the curve), with points closer to the centre of our curve being shifted more than the points closer to the curve ends.
 </p>
-
 
 <figure class="figure  py-4">
   <img src="{{ '/assets/img/blog/polyMaker/03.jpg' | absolute_url }}" class="img-fluid w-100 pb-1" alt="Responsive image">
-  <figcaption class="figure-caption text-center">A grid of points perpendicular to the curve line segments</figcaption>
+  <figcaption class="figure-caption text-center">A grid of points generated along normals</figcaption>
 </figure>
 
 <h3 class="my-5">Delauney triangulation</h3>
