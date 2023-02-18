@@ -4,23 +4,26 @@ layout: default
 
 
 <!-- Post Title -->
-<section id="blog-posts-title" class="bg-white text-dark py-5">
+<section id="post-title" class="bg-white text-dark py-5">
     <div class="container pt-5">
-        <h1 class="post-title text-left py-2">{{ page.title }}</h1>
-        <ul class="list-inline text-left">
-            <li class="list-inline-item text-muted"><h6><i>{{ page.date | date_to_string }}</i></h6></li>
+        <h1 class="post-title text-center py-2 fs-1 fw-light">{{ page.title }}</h1>
+        <ul class="list-inline text-center fw-light text-muted">
+            <li class="list-inline-item"><p>{{ page.date |  date: "%B %d, %Y"}}</p></li>
             <!-- {% for tag in page.tags%}
-                <li class="list-inline-item text-green cursor-default"><h6>#{{tag}}</h6></li>
+                <li class="list-inline-item"><h6>#{{tag}}</h6></li>date_to_string
             {% endfor %} -->
         </ul>
+        
     </div>
+    
 </section>
 
+
 <!-- Post Content -->
-<section id="blog-posts-content" class="bg-white text-dark py-2">
-    <div class="container post-content  fill-viewport-70 pb-5">
+<section id="post-content" class="bg-white text-dark py-2">
+    <div class="container post-body  fill-viewport-70 pb-5">
         <!-- <article class="post-content"> -->
-            
+            <hr>
             <div class="row">
                 <div class="col-0"></div>
                 <div class="col-12">{{ content }}</div>

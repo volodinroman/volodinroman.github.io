@@ -1,0 +1,20 @@
+
+
+/* FOOTER */
+.copyright{
+    font-size: .8rem;
+}
+ 
+.copyright:before{
+	color: #5d5d5d;
+    content: "© 2023 Roman Volodin";
+    font-size: 14px;
+}
+
+.social-wrapper{
+    cursor: default;
+}
+
+.fa-flag:hover {
+    color: #1abc9c;
+}

@@ -1,0 +1,16 @@
+// Highlight.JS 
+
+.hljs {
+    border-radius: 5px;
+    line-height: 24px;
+    font-size: 14px;
+}
+
+pre code.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 1em;
+    padding-bottom: 20px !important;
+    margin-top: 20px;
+    // margin-bottom: 20px;
+}

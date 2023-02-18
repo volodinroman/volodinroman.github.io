@@ -52,8 +52,9 @@ tags: [Python, PyQt, Qt, Math]
 The following code is a Python implementation of these equations.
 </p>
 
-<div class="py-4">
-{% highlight python  linenos%}
+
+<pre>
+    <code class="language-python">
 import math
 
 def binomial(i, n):
@@ -81,8 +82,9 @@ def bezierCurve(n, points):
     for i in range(n):
         t = i / float(n - 1)
         yield bezier(t, points)
-{% endhighlight %}
-</div>
+    </code>
+</pre>
+
 
 <h3 class="my-4">Grid points</h3>
 

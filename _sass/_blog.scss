@@ -1,0 +1,36 @@
+
+// Blog
+
+#blog .post-list-item {
+    cursor: default;
+}
+
+#blog  .post-list-title:hover{
+    color: #2473ce !important;
+    text-decoration: underline;
+}
+
+#blog .text-green{
+    color: #1abc9c !important;
+}
+
+
+// Post
+
+.post-body p{
+    color:#333333;
+}
+
+.post-body ul{
+    color:#333333;
+}
+
+#post-content h2{
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: 400;
+}
+
+#post-content .alert p{
+    margin: 0px !important;
+}

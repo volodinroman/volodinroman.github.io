@@ -1,0 +1,23 @@
+body, html{
+    /* line-height: 1.8; */
+    // font-family: 'Open Sans', sans-serif;
+    font-family: "Inter","sans-serif";
+    font-weight:400;
+    font-size: 16px;
+    font-style: normal;
+    // line-height: 28px;
+    line-height: 1.5em;
+    // font-family: Helvetica, Arial, sans-serif;
+    height: 100%;
+}
+
+a {outline: none;}
+a:link {text-decoration: none;color:inherit;}
+a:visited {text-decoration:none;color:inherit;}
+a:hover {text-decoration: none;color:inherit;}
+a:active {text-decoration: none;color:inherit;}
+
+.cursor-default:hover{
+    cursor: default !important;
+}
+
