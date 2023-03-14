@@ -3,20 +3,21 @@
 
 .navbar-brand{
     font-size:26px;
-    font-weight: 300;
-    color: black;
+    font-weight: 400;
+    color: #888888 !important;
 }
 .navbar-brand:hover{
-    color: white !important;
+    color: #000000 !important;
 }
 
 .navbar {
+    font-size: 19px;
     letter-spacing: 1px;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .navbar-nav  li a:hover {
-    color: #fff !important;
+    color: #000000 !important;
 }
 
 // .navbar-toggler {
