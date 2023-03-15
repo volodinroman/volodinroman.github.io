@@ -7,17 +7,11 @@ tags: [OpenMaya API, Maya, Math, Matrices, Python]
 ---
 
 
-<h2 class="py-4">Why I wrote this article</h2>
+<p>Maya is a powerful tool that provides artists and technical specialists with a vast array of capabilities. One of its greatest strengths lies in the Maya API, which allows for the development of custom tools and plugins to enhance the software's functionality. However, even with access to the API, many developers still struggle with the concept of matrices. While they are a fundamental aspect of 3D graphics, matrices can be complex and difficult to grasp for those without a strong math background. Yet, understanding matrices is essential for creating powerful tools and plugins that can truly take Maya to the next level.</p>
 
 <p>
-If you are reading this, you probably heard about matrices and their use in computer graphics. I started my programming journey in Maya with MEL and then moved on to Python. My curiosity for learning more led me to experiment with Maya Python API (OpenMaya) and later with C++ Plugins for Maya. Vectors and matrices were everywhere. If I could learn vectors math in a couple of days, matrices were a persistent challenge for me. Despite searching for a comprehensive article or a youtube video about matrices in Maya, I was unable to find one that fully addressed my needs. Well, now I know matrices. When I discuss matrices with my students or colleagues, the majority of them appear to be unfamiliar with the concept and view it as an arcane knowledge possessed only by hardcore programmers with 100 years of experience. 
+I've seen many resources and tutorials that focus heavily on the mathematical aspects of matrices. In this article, I aim to take a different approach by explaining how matrices can be used to achieve specific results in Maya without getting bogged down in complex equations. By understanding the practical applications of matrices, you'll be able to apply this knowledge to other software programs as well. It's assumed that you have a basic understanding of Python, as well as experience with object-oriented programming and the Maya Python API. 
 </p>
-
-<p>
-Matrices can indeed be a complex and challenging subject to understand, and this article is my own personal interpretation of the subject. It is is designed for individuals who have prior programming experience in Maya and seek to improve their understanding of matrices to further enhance their tools. <b>It is assumed that you have a basic knowledge of Python, classes, and some aspects of OpenMaya</b>. Although OpenMaya is a broad subject, it will not be covered in this article. Instead, you will receive a straightforward and accessible explanation of matrices without the use of intricate mathematical formulas or concepts. Practical examples are included and can be easily copy-pasted into the Maya ScriptEditor for testing. Let's get started!
-</p>
-
-<p>Feel free to use this article as a reference with code snippets. Because I will!</p>
 
 <a target = "_blank" href="https://github.com/volodinroman/matrices-in-maya">
   <button type="button" class="btn btn-dark my-2">GitHub: Matrices in Maya</button>
@@ -26,26 +20,38 @@ Matrices can indeed be a complex and challenging subject to understand, and this
 <h2 class="py-4">What is a transformation matrix</h2>
 
 <p>
-A transformation matrix is used to represent an object's <b>position</b>, <b>rotation</b>, and <b>scale</b> in space because it provides a compact and efficient way of encoding these transformations into a single matrix. 
+A transformation matrix is used to represent an object's <b>position</b>, <b>rotation</b>, and <b>scale</b> in space because it provides a compact and efficient way of encoding these transformations into a single matrix. When we <b>multiply matrices</b>, we combine transformations into a final matrix. The order of multiplication is crucial factor in determining the resulting transformation. Just imagine, if you rotate an object several times around a random axis in Maya viewport and then repeat the same rotations but in a different order will produce different results. At the end, we apply the resulting matrix to an object (it can also be a point or a vector).
 </p>
 
-<p>
-Once we have found a transformation matrix, it can be broken down into rotation, translation, and scale values. However, in most cases, we use the entire matrix for our calculations. When we apply a matrix to an object, we modify its transformation values. <b>Keep in mind, matrix and vector mathematics often go together.</b>  We can create transformation matrices from scratch in different ways. If we know specific coordinates, we can create a matrix that only moves the object to that coordinate. If we know the rotation values, we can create a matrix that only rotates the object but keeps it in the same place. We can rotate an object around a specific point in space or axis, and even place it on the surface of another object. We can combine rotation, translation, and scale matrices by multiplying them. This way, we can achieve many different effects and transform objects in different ways. <b>OpenMaya API makes working with matrices simple and efficient by providing all the necessary commands and classes.</b>
-</p>
+<p>A transformation matrix is composed of 16 floating-point numbers. Each number represents a different aspect of the transformation being applied. There are a lot of articles explaining what each number means and how to get/set, for example, rotations values from the matrix. But, if we know how to use Maya Python API (or any other API), we can easily extract rotation values from the matrix with just one command.</p>
 
-<p>
+<p>An <b>Identity</b> matrix represents zero transformations. We typically do not apply it to an object, but it can serve as a starting point where we can set only rotation or translation values. For instance, if we have specific coordinates and wish to move our object to that position while preserving its rotation and scale, we create an Identity matrix, set the translation (now our identity matrix becomes a translation matrix), and multiply the object matrix by the translation matrix.</p>
+
+<div class="alert alert-secondary fw-light" role="alert">
+  <p>Translation, rotation, and scaling matrices must be multiplied in the order <b>Scale * Rotate * Translate</b>. This order ensures predictable object translations and helps prevent any unwanted deformations (unless you intentionally want to achieve a different result). Thus, if we first rotate the object and then scale, we can accidentially squash it. It's funny, but pointless.</p>
+</div>
+
+<p>If we want to reverse the transformation of our objects, we can take the matrix we used to transform our object and <b>invert</b> it. Then, we multiply our object's matrix by the inverted matrix. Inverse matrices are also helpful for converting between different coordinate spaces in Maya, which we will discuss later.</p>
+
+<p>Matrices can be modified and multiplied in various ways to achieve a range of effects. For instance, we can rotate an object around a particular point or axis in space, and position it on the surface of another object.</p>
+
+<!-- <p>
+Once we have found a transformation matrix, it can be broken down into rotation, translation, and scale values. However, in most cases, we use the entire matrix for our calculations. When we apply a matrix to an object, we modify its transformation values. <b>Keep in mind, matrix and vector mathematics often go together.</b>  We can create transformation matrices from scratch in different ways. If we know specific coordinates, we can generate a matrix that only moves the object to that coordinate. If we know the rotation values, we can create a matrix that only rotates the object but keeps it in the same place. We can rotate an object around a specific point in space or axis, and even place it on the surface of another object. We can combine rotation, translation, and scale matrices by multiplying them. This way, we can achieve many different effects and transform objects in different ways. <b>OpenMaya API makes working with matrices simple and efficient by providing all the necessary commands and classes.</b>
+</p> -->
+
+
+
+<!-- <p>
 We can <b>inverse a matrix</b> to undo or reverse the transformations of our object. For example, if we used some matrix to rotate our object, we can revert this action by multiplying a matrix of our object by the inversed matrix. Inversed matrix can also be used to <b>convert between different coordinate spaces in Maya</b> (I'll describe them below). For example, to get a world matrix of our object that is a child of another object, we multiply the object's local matrix by the parent's world matrix. Conversely, if we want to get the local position of an object that is a child of another object, we can multiply the object's world matrix by the parent's inverse world matrix, which gives us the object's local matrix.
-</p> 
+</p>  -->
 
-<p>
-Here are some notes about transformation matrices:
-</p>
+
 
 <ul>
-  <li>An "<b>Identity</b>" matrix is a matrix that holds <b>zero transformations</b>.</li>
-  <li>Changing the order of matrices during multiplication can result in a different effect, because <b>matrices are not commutative</b>. This means that M1 * M2 is not the same as M2 * M1.</li>
-  <li>Translation, rotation, and scaling matrices must be multiplied in the order <b>Scale * Rotate * Translate</b>. This order ensures predictable object translations and helps prevent any unwanted deformations (unless you intentionally want to achieve a different result). Thus, if we first rotate the object and then scale, we can accidentially squash it. It's funny, but pointless.</li>
-  <li>The <b>rotation order</b> in Maya determines the order of rotation matrices that are multiplied to produce the final rotation matrix for an object. The default order is XYZ. Rotation orders are hierarchys written backwards, eg. xyz is Rz * Ry * Rx. Changing the rotation order can affect the final rotation of an object. The right rotation order can help us avoid Gimbal Lock, thus animators will see clearly represented animation curves.</li>
+  <!-- <li>An "<b>Identity</b>" matrix is a matrix that holds <b>zero transformations</b>.</li> -->
+  <!-- <li>Changing the order of matrices during multiplication can result in a different effect, because <b>matrices are not commutative</b>. This means that M1 * M2 is not the same as M2 * M1.</li> -->
+  <!-- <li>Translation, rotation, and scaling matrices must be multiplied in the order <b>Scale * Rotate * Translate</b>. This order ensures predictable object translations and helps prevent any unwanted deformations (unless you intentionally want to achieve a different result). Thus, if we first rotate the object and then scale, we can accidentially squash it. It's funny, but pointless.</li> -->
+  <!-- <li>The <b>rotation order</b> in Maya determines the order of rotation matrices that are multiplied to produce the final rotation matrix for an object. The default order is XYZ. Rotation orders are hierarchys written backwards, eg. xyz is Rz * Ry * Rx. Changing the rotation order can affect the final rotation of an object. The right rotation order can help us avoid Gimbal Lock, thus animators will see clearly represented animation curves.</li> -->
 </ul>
 
 
@@ -193,6 +199,10 @@ transformation_matrix = om.MTransformationMatrix(matrix)</code>
 
 <p>In Maya, there are numerous methods to manipulate matrices. Although a certain degree of programming and mathematical proficiency is required to work with matrices directly, Maya offers various options for programmers to utilize matrices in tools for artists.</p>
 
+
+
+
+
 <p>Maya NodeEditor provides a fast method for prototyping logic. However, its nodes can be non-intuitive, requiring time to locate the correct nodes for tasks such as creating a point or multiplying it by a vector or a matrix. Once you become familiar with the limited number of nodes necessary for matrix and vector mathematics, you will find it straightforward to prototype your logic.</p> 
 
 <p>A Transform node in Maya represents the transformation of an object, and it has various outputs that can be utilized in the NodeEditor to prototype a tool logic. The outputs that you may need include:</p>
@@ -210,6 +220,10 @@ transformation_matrix = om.MTransformationMatrix(matrix)</code>
 </ul>
 
 <img src="{{ '/assets/img/blog/matrices_in_maya/nodeeditor.jpg' | absolute_url }}" class="img-fluid py-4" alt="...">
+
+<div class="alert alert-secondary fw-light" role="alert">
+  <p><b>Do you know that Transform nodes in Maya have a "Rotate order" option?</b> The <b>rotation order</b> in Maya determines the order of rotation matrices that are multiplied to produce the final rotation matrix for an object. The default order is XYZ. Rotation orders are hierarchies written backwards, eg. xyz is Rz * Ry * Rx. Changing the rotation order can affect the final rotation of an object. The right rotation order can help us avoid Gimbal Lock, thus animators will see clearly represented animation curves.</p>
+</div>
 
 <p>
 In addition to nodes, Maya offers API to perform matrix and vector operations and simplify object transformations. You can use the maya.cmds module or access the Maya API via C++ or Python. In my experience, the best way to work with transformations is using <b>Maya Python API (OpenMaya)</b>, which offers a vast array of commands and classes, making it both powerful and easy to use, without having to navigate the complexities of C++. 
