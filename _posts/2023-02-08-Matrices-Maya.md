@@ -20,12 +20,31 @@ I've seen many resources and tutorials that focus heavily on the mathematical as
 <h2 class="py-4">What is a transformation matrix</h2>
 
 <p>
-A transformation matrix is used to represent an object's <b>position</b>, <b>rotation</b>, and <b>scale</b> in space because it provides a compact and efficient way of encoding these transformations into a single matrix. When we <b>multiply matrices</b>, we combine transformations into a final matrix. The order of multiplication is crucial factor in determining the resulting transformation. Just imagine, if you rotate an object several times around a random axis in Maya viewport and then repeat the same rotations but in a different order will produce different results. At the end, we apply the resulting matrix to an object (it can also be a point or a vector).
+A transformation matrix is used to represent an object's <b>position</b>, <b>rotation</b>, and <b>scale</b> in space because it provides a compact and efficient way of encoding these transformations into a single unit - matrix. When we <b>multiply matrices</b>, we combine transformations into a final matrix. The order of multiplication is crucial factor in determining the resulting transformation. Just imagine, if you rotate an object several times around a random axis in Maya viewport and then repeat the same rotations but in a different order will produce different results. At the end, we apply the resulting matrix to an object (it can also be a point or a vector).
 </p>
 
 <p>A transformation matrix is composed of 16 floating-point numbers. Each number represents a different aspect of the transformation being applied. There are a lot of articles explaining what each number means and how to get/set, for example, rotations values from the matrix. But, if we know how to use Maya Python API (or any other API), we can easily extract rotation values from the matrix with just one command.</p>
 
-<p>An <b>Identity</b> matrix represents zero transformations. We typically do not apply it to an object, but it can serve as a starting point where we can set only rotation or translation values. For instance, if we have specific coordinates and wish to move our object to that position while preserving its rotation and scale, we create an Identity matrix, set the translation (now our identity matrix becomes a translation matrix), and multiply the object matrix by the translation matrix.</p>
+<pre>
+<code class="language-python">"""Let's check how we can retrieve an object's world matrix using Maya Python API"""
+
+selection_list = OpenMaya.MSelectionList() 
+selection_list.add("pCube1") # place an object into a MSelectionList
+dagPath_Cube = selection_list.getDagPath(0)  # extracts the object's DAG Path
+world_matrix = dagPath_Cube.inclusiveMatrix() # get an object's world matrix as MMatrix
+
+# extract translation values
+transformation_matrix = OpenMaya.MTransformationMatrix(cube_world_matrix)
+translation = transformation_matrix.translation(OpenMaya.MSpace.kWorld)
+print(translation) # >> (-0.875594, 1.21776, 0.309122)</code>
+</pre>
+
+<a target = "_blank" href="https://github.com/volodinroman/matrices-in-maya/blob/main/src/get_object_world_matrix.py">
+  <button type="button" class="btn btn-dark my-2">Example: Other ways to get object world matrix</button>
+</a>
+
+<p>An <b>Identity</b> matrix is an empty matrix that represents zero transformations. We typically do not apply it to an object, but it can serve as a starting point where we can set, for example, only rotation or translation values. For instance, if we have specific coordinates and wish to move our object to that position while preserving its rotation and scale, we create an Identity matrix, set the translation (now our identity matrix becomes a translation matrix), and multiply the object matrix by the translation matrix.</p>
+
 
 <div class="alert alert-secondary fw-light" role="alert">
   <p>Translation, rotation, and scaling matrices must be multiplied in the order <b>Scale * Rotate * Translate</b>. This order ensures predictable object translations and helps prevent any unwanted deformations (unless you intentionally want to achieve a different result). Thus, if we first rotate the object and then scale, we can accidentially squash it. It's funny, but pointless.</p>
@@ -33,59 +52,15 @@ A transformation matrix is used to represent an object's <b>position</b>, <b>rot
 
 <p>If we want to reverse the transformation of our objects, we can take the matrix we used to transform our object and <b>invert</b> it. Then, we multiply our object's matrix by the inverted matrix. Inverse matrices are also helpful for converting between different coordinate spaces in Maya, which we will discuss later.</p>
 
+<a target = "_blank" href="https://github.com/volodinroman/matrices-in-maya/blob/main/src/move_object_up_and_undo.py">
+  <button type="button" class="btn btn-dark my-2">Example: Undo object transformations</button>
+</a>
+
 <p>Matrices can be modified and multiplied in various ways to achieve a range of effects. For instance, we can rotate an object around a particular point or axis in space, and position it on the surface of another object.</p>
-
-<!-- <p>
-Once we have found a transformation matrix, it can be broken down into rotation, translation, and scale values. However, in most cases, we use the entire matrix for our calculations. When we apply a matrix to an object, we modify its transformation values. <b>Keep in mind, matrix and vector mathematics often go together.</b>  We can create transformation matrices from scratch in different ways. If we know specific coordinates, we can generate a matrix that only moves the object to that coordinate. If we know the rotation values, we can create a matrix that only rotates the object but keeps it in the same place. We can rotate an object around a specific point in space or axis, and even place it on the surface of another object. We can combine rotation, translation, and scale matrices by multiplying them. This way, we can achieve many different effects and transform objects in different ways. <b>OpenMaya API makes working with matrices simple and efficient by providing all the necessary commands and classes.</b>
-</p> -->
-
-
 
 <!-- <p>
 We can <b>inverse a matrix</b> to undo or reverse the transformations of our object. For example, if we used some matrix to rotate our object, we can revert this action by multiplying a matrix of our object by the inversed matrix. Inversed matrix can also be used to <b>convert between different coordinate spaces in Maya</b> (I'll describe them below). For example, to get a world matrix of our object that is a child of another object, we multiply the object's local matrix by the parent's world matrix. Conversely, if we want to get the local position of an object that is a child of another object, we can multiply the object's world matrix by the parent's inverse world matrix, which gives us the object's local matrix.
 </p>  -->
-
-
-
-<ul>
-  <!-- <li>An "<b>Identity</b>" matrix is a matrix that holds <b>zero transformations</b>.</li> -->
-  <!-- <li>Changing the order of matrices during multiplication can result in a different effect, because <b>matrices are not commutative</b>. This means that M1 * M2 is not the same as M2 * M1.</li> -->
-  <!-- <li>Translation, rotation, and scaling matrices must be multiplied in the order <b>Scale * Rotate * Translate</b>. This order ensures predictable object translations and helps prevent any unwanted deformations (unless you intentionally want to achieve a different result). Thus, if we first rotate the object and then scale, we can accidentially squash it. It's funny, but pointless.</li> -->
-  <!-- <li>The <b>rotation order</b> in Maya determines the order of rotation matrices that are multiplied to produce the final rotation matrix for an object. The default order is XYZ. Rotation orders are hierarchys written backwards, eg. xyz is Rz * Ry * Rx. Changing the rotation order can affect the final rotation of an object. The right rotation order can help us avoid Gimbal Lock, thus animators will see clearly represented animation curves.</li> -->
-</ul>
-
-
-<p>Let's check how we can get a world matrix of an object in Maya.</p>
-
-<pre>
-<code class="language-python">"""
-Get an object world matrix
-"""
-# using OpenMaya
-import maya.api.OpenMaya as OpenMaya
-sel_list = om.MSelectionList() 
-sel_list.add("pCube1")
-dagPath_Cube = sel_list.getDagPath(0) # get Cube dag path
-world_matrix = dagPath_Cube.inclusiveMatrix() # returns world matrix of a cube as MMatrix object
-
-# using maya.cmds
-import maya.cmds as cmds
-world_matrix = cmds.xform('pCube1', q=True, worldSpace=True, matrix=True)
-
-# using a transform node attribute "worldMatrix"
-import maya.cmds as cmds
-import maya.api.OpenMaya as om
-world_matrix = cmds.getAttr("pCube1.worldMatrix")
-world_matrix = om.MMatrix(((*world_matrix[0:4]),(*world_matrix[4:8]),(*world_matrix[8:12]),(*world_matrix[12:16]))) # wrap into MMatrix
-
-# Output (this is just an example)
-'''
-( 0.953066,  -0.0453,  -0.2993,  0), 
-( -0.15506,  0.77621,  -0.6111,  0), 
-( 0.260041,  0.62884,  0.73276,  0), 
-( -1.30316,  4.78874,  1.10175,  1)
-'''</code>
-</pre>
 
 
 <h2 class="py-4">Object, Local and World Spaces</h2>
