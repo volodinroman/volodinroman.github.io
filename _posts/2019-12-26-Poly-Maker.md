@@ -53,9 +53,9 @@ The following code is a Python implementation of these equations.
 </p>
 
 
-<pre>
-    <code class="language-python">
-import math
+<div class="code-block">
+    <div class="top-bar">Python</div>
+    <pre><code class="language-python">import math
 
 def binomial(i, n):
     """Binomial coefficient"""
@@ -81,9 +81,13 @@ def bezierCurve(n, points):
     """Bezier curve points generator"""
     for i in range(n):
         t = i / float(n - 1)
-        yield bezier(t, points)
-    </code>
-</pre>
+        yield bezier(t, points)</code></pre>
+    <div class="bottom-bar">
+        <span class="title">Bezier curve python implementation</span>
+        <button class="copy-btn">Copy</button>
+    </div>
+</div>
+
 
 
 <h3 class="my-4">Grid points</h3>

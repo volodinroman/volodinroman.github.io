@@ -2,6 +2,8 @@ body, html{
     /* line-height: 1.8; */
     // font-family: 'Open Sans', sans-serif;
     font-family: "Inter","sans-serif";
+    // font-family: Google Sans,Helvetica Neue,sans-serif;
+    // font-family: "Segoe UI Web (West European)",Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
     font-weight:400;
     font-size: 16px;
     font-style: normal;
@@ -9,6 +11,10 @@ body, html{
     line-height: 1.5em;
     // font-family: Helvetica, Arial, sans-serif;
     height: 100%;
+
+    /* For Firefox */
+    scrollbar-width: thin; /* or "auto" or "thin" */
+    scrollbar-color: #555 #333; /* thumb and track colors */
 }
 
 a {outline: none;}
@@ -21,3 +27,20 @@ a:active {text-decoration: none;color:inherit;}
     cursor: default !important;
 }
 
+
+/* This styles the scrollbar track */
+::-webkit-scrollbar-track {
+    background-color: #333; /* The track color should match the background color of the container */
+}
+
+/* This styles the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background-color: #888; /* The thumb color, can be any color */
+    border-radius: 10px; /* Makes the thumb's corners rounded */
+    border: 3px solid #333; /* Same color as the scrollbar track for the "groove" effect */
+}
+
+/* This styles the scrollbar itself (width, etc.) */
+::-webkit-scrollbar {
+    width: 12px; /* The width of the scrollbar */
+}

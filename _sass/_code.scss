@@ -1,21 +1,63 @@
-// Highlight.JS 
-
 .hljs {
-    border-radius: 5px;
     line-height: 24px;
     font-size: 14px;
 }
 
 pre {
-    margin-bottom: 0px !important;
+    margin-bottom: 0 !important;
 }
 
 pre code.hljs {
     display: block;
     overflow-x: auto;
-    padding: 1em;
-    padding-bottom: 20px !important;
-    margin-top: 20px;
-    // margin-bottom: 1px !important;
+    padding: 1.3em 1em;
+    margin-top: 0;
 }
 
+/* ------------------- */
+
+.code-block {
+    background: #333; /* Adjust to match your theme */
+    border-radius: 16px;
+    margin: 30px 0;
+    overflow: hidden; /* For border-radius on child elements */
+}
+
+.top-bar,
+.bottom-bar {
+    background: #444; /* Contrast with code block */
+    color: rgb(174, 174, 174);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2em 1em;
+    font-size: 0.85em;
+}
+
+.top-bar {
+    border-bottom: 1px solid #555;
+}
+
+.bottom-bar {
+    border-top: 1px solid #555;
+}
+
+.bottom-bar a {
+    color: #a8c7fa; /* Adjust color as needed */
+    text-decoration: none;
+}
+
+.bottom-bar a:hover {
+    color: #bdceeb; /* Hover state color */
+    text-decoration: underline;
+}
+
+.copy-btn {
+    background: #555; /* Match with theme */
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+/* Continue with other styles */
