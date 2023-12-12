@@ -3,20 +3,17 @@ layout: post
 title:  "Matrices in Maya"
 date:   2023-02-08 21:12:00 -0700
 categories: math
+github: "https://github.com/volodinroman/matrices-in-maya"
 tags: [OpenMaya API, Maya, Math, Matrices, Python]
 ---
 
-<p>Maya is a powerful tool that provides artists and technical specialists with a vast array of capabilities. One of its greatest strengths lies in the Maya API, which allows for the development of custom tools and plugins to enhance the software's functionality. However, even with access to the API, many developers still struggle with the concept of matrices. While they are a fundamental aspect of 3D graphics, matrices can be complex and difficult to grasp for those without a strong math background. Yet, understanding matrices is essential for creating powerful tools and plugins that can truly take Maya to the next level.</p>
+<h3 class="py-4">Overview</h3>
 
 <p>
-I've seen many resources and tutorials that focus heavily on the mathematical aspects of matrices. In this article, I aim to take a different approach by explaining how matrices can be used to achieve specific results in Maya without getting bogged down in complex equations. By understanding the practical applications of matrices, you'll be able to apply this knowledge to other software programs as well. It's assumed that you have a basic understanding of Python, as well as experience with object-oriented programming and the Maya Python API. 
+Maya offers extensive capabilities for artists and technical experts, significantly enhanced by its API for custom tool and plugin development. However, grasping matrices—a core component of 3D graphics—remains challenging for developers, especially those with limited math skills. Mastering matrices is vital for leveraging Maya's full potential. This article focuses on practical matrix applications in Maya, avoiding complex mathematical details. It's beneficial for readers with basic Python skills, familiarity with object-oriented programming, and experience with Maya's Python API.
 </p>
 
-<a target = "_blank" href="https://github.com/volodinroman/matrices-in-maya">
-  <button type="button" class="btn btn-dark my-2">GitHub: Matrices in Maya</button>
-</a>
-
-<h2 class="py-4">What is a transformation matrix</h2>
+<h3 class="py-4">What is a transformation matrix</h3>
 
 <p>
 A transformation matrix is used to represent an object's <b>position</b>, <b>rotation</b>, and <b>scale</b> in space because it provides a compact and efficient way of encoding these transformations into a single unit - matrix. When we <b>multiply matrices</b>, we combine transformations into a final matrix. The order of multiplication is crucial factor in determining the resulting transformation. Just imagine, if you rotate an object several times around a random axis in Maya viewport and then repeat the same rotations but in a different order will produce different results. At the end, we apply the resulting matrix to an object (it can also be a point or a vector).
@@ -24,43 +21,38 @@ A transformation matrix is used to represent an object's <b>position</b>, <b>rot
 
 <p>A transformation matrix is composed of 16 floating-point numbers. Each number represents a different aspect of the transformation being applied. There are a lot of articles explaining what each number means and how to get/set, for example, rotations values from the matrix. But, if we know how to use Maya Python API (or any other API), we can easily extract rotation values from the matrix with just one command.</p>
 
+<p>Retrieving an object's world matrix using Maya Python API. Explore more <a class="text-info" target = "_blank" href="https://github.com/volodinroman/matrices-in-maya/blob/main/src/get_object_world_matrix.py">examples</a>.</p>
 
 <div class="code-block">
-    <div class="top-bar">Python</div>
-    <pre><code class="language-python">import maya.cmds as cmds
+    <pre><button class="copy-btn"><i class="fas fa-copy"></i></button><code class="language-python"># Import Maya commands and OpenMaya API
+import maya.cmds as cmds
 import maya.api.OpenMaya as OpenMaya
 
-selection_list = OpenMaya.MSelectionList() 
-selection_list.add("pCube1") # place an object into a MSelectionList
-dagPath_Cube = selection_list.getDagPath(0)  # extracts the object's DAG Path
-world_matrix = dagPath_Cube.inclusiveMatrix() # get an object's world matrix as MMatrix
+# Create a selection list and add an object to it
+selection_list = OpenMaya.MSelectionList()
+selection_list.add("pCube1")  # Add 'pCube1' to the selection list
 
-# extract translation values
-transformation_matrix = OpenMaya.MTransformationMatrix(cube_world_matrix)
+# Retrieve the DAG path of the first object in the selection list
+dagPath_Cube = selection_list.getDagPath(0)
+
+# Obtain the world matrix of the object
+world_matrix = dagPath_Cube.inclusiveMatrix()
+
+# Extract translation values from the transformation matrix
+transformation_matrix = OpenMaya.MTransformationMatrix(world_matrix)
 translation = transformation_matrix.translation(OpenMaya.MSpace.kWorld)
-print(translation) # >> (-0.875594, 1.21776, 0.309122)</code></pre>
-    <div class="bottom-bar">
-        <span class="title">Retrieving an object's world matrix using the Maya Python API. Explore more <a target = "_blank" href="https://github.com/volodinroman/matrices-in-maya/blob/main/src/get_object_world_matrix.py">examples</a></span>
-        <button class="copy-btn">Copy</button>
-    </div>
+
+# Print the translation values
+print(translation)  # Output: (-0.875594, 1.21776, 0.309122)</code></pre>
 </div>
 
-<!-- <a target = "_blank" href="https://github.com/volodinroman/matrices-in-maya/blob/main/src/get_object_world_matrix.py">
-  <button type="button" class="btn btn-dark my-2">Example: Other ways to get object world matrix</button>
-</a> -->
-
 <p>An <b>Identity</b> matrix is an empty matrix that represents zero transformations. We typically do not apply it to an object, but it can serve as a starting point where we can set, for example, only rotation or translation values. For instance, if we have specific coordinates and wish to move our object to that position while preserving its rotation and scale, we create an Identity matrix, set the translation (now our identity matrix becomes a translation matrix), and multiply the object matrix by the translation matrix.</p>
-
 
 <div class="alert alert-secondary fw-light" role="alert">
   <p>Translation, rotation, and scaling matrices must be multiplied in the order <b>Scale * Rotate * Translate</b>. This order ensures predictable object translations and helps prevent any unwanted deformations (unless you intentionally want to achieve a different result). Thus, if we first rotate the object and then scale, we can accidentially squash it. It's funny, but pointless.</p>
 </div>
 
-<p>If we want to reverse the transformation of our objects, we can take the matrix we used to transform our object and <b>invert</b> it. Then, we multiply our object's matrix by the inverted matrix. Inverse matrices are also helpful for converting between different coordinate spaces in Maya, which we will discuss later.</p>
-
-<a target = "_blank" href="https://github.com/volodinroman/matrices-in-maya/blob/main/src/move_object_up_and_undo.py">
-  <button type="button" class="btn btn-dark my-2">Example: Undo object transformations</button>
-</a>
+<p>If we want to <a class="text-info" class="text-info" href="https://github.com/volodinroman/matrices-in-maya/blob/main/src/move_object_up_and_undo.py">reverse</a> the transformation of our objects, we can take the matrix we used to transform our object and <b>invert</b> it. Then, we multiply our object's matrix by the inverted matrix. Inverse matrices are also helpful for converting between different coordinate spaces in Maya, which we will discuss later.</p>
 
 <p>Matrices can be modified and multiplied in various ways to achieve a range of effects. For instance, we can rotate an object around a particular point or axis in space, and position it on the surface of another object.</p>
 
@@ -69,7 +61,7 @@ We can <b>inverse a matrix</b> to undo or reverse the transformations of our obj
 </p>  -->
 
 
-<h2 class="py-4">Object, Local and World Spaces</h2>
+<h3 class="py-4">Object, Local and World Spaces</h3>
 
 <img src="{{ '/assets/img/blog/matrices_in_maya/spaces.jpg' | absolute_url }}" class="img-fluid py-4" alt="...">
 
@@ -92,36 +84,45 @@ We can <b>inverse a matrix</b> to undo or reverse the transformations of our obj
 </div>
 
 <div class="alert alert-secondary fw-light" role="alert">
-  <p><b>Fact 2.</b> When querying vertex position or normal vector, OpenMaya returns the coordinates in <b>object space</b> by default. We can obtain the global coordinate of a vertex (or any other component) by multiplying its local coordinate by the <b>object's world matrix</b>. The <b>transform node</b> makes it simple to retrieve the world matrix for an object.</p>
+  <p><b>Fact 2.</b> When querying vertex position or normal vector, OpenMaya returns the coordinates in <b>object space</b> by default. We can obtain the global coordinate of a vertex (or any other component) by multiplying its local coordinate by the <b>object's world matrix</b>. A <b>transform node</b> makes it simple to retrieve the world matrix for an object.</p>
 </div>
+
+<p>Let's check an example of geting an object's points positions in Object Space and convert them into a World Space coordinate:</p>
 
 
 <div class="code-block">
-    <div class="top-bar">Python</div>
-    <pre><code class="language-python">import maya.cmds as cmds
+    <!-- <div class="top-bar">Python</div> -->
+    <pre><button class="copy-btn"><i class="fas fa-copy"></i></button><code class="language-python">import maya.cmds as cmds
 import maya.api.OpenMaya as om
 
-# Create a cube and move/rotate it
-cube = cmds.polyCube()[0]
-cmds.move(2, 3, 4)
-cmds.rotate(13, 16, 20)
+def create_and_transform_cube():
+    """Create a cube and apply transformations."""
+    cube = cmds.polyCube()[0]
+    cmds.move(2, 3, 4, cube)
+    cmds.rotate(13, 16, 20, cube)
+    return cube
 
-# Get the world matrix and iterate over vertices
-sel_list = om.MSelectionList()
-sel_list.add(cube)
-dag_path = sel_list.getDagPath(0)
-world_matrix = dag_path.inclusiveMatrix()
-iter = om.MItMeshVertex(dag_path)
+def get_world_matrix(object_name):
+    """Get the world matrix of the specified object."""
+    sel_list = om.MSelectionList()
+    sel_list.add(object_name)
+    dag_path = sel_list.getDagPath(0)
+    return dag_path.inclusiveMatrix()
 
-# Print object space and world space positions
-while not iter.isDone():
-    # Get the vertex position in object space and transform it to world space
-    pos = iter.position()  # position in Object Space
-    world_pos = pos * world_matrix  # world position
+def print_vertex_positions(object_name):
+    """Print object space and world space positions of object vertices."""
+    world_matrix = get_world_matrix(object_name)
+    vertex_iter = om.MItMeshVertex(object_name)
 
-    # Print both positions with descriptive labels
-    print(f"Object space: {pos}, World space: {world_pos}")
-    iter.next()
+    while not vertex_iter.isDone():
+        pos = vertex_iter.position(om.MSpace.kObject)  # Object Space position
+        world_pos = pos * world_matrix  # Convert to World Space position
+        print(f"Object space: {pos}, World space: {world_pos}")
+        vertex_iter.next()
+
+# Main execution
+cube = create_and_transform_cube()
+print_vertex_positions(cube)
 
 """
 Result:
@@ -134,14 +135,14 @@ Result:
 (-0.5, -0.5, -0.5, 1) (1.52119, 2.42697, 3.56139, 1)
 (0.5, -0.5, -0.5, 1) (2.42448, 2.75574, 3.28575, 1)
 """</code></pre>
-    <div class="bottom-bar">
+    <!-- <div class="bottom-bar">
         <span class="title">Geting an object's points positions in Object Space and convert them into a World Space coordinate</span>
         <button class="copy-btn">Copy</button>
-    </div>
+    </div> -->
 </div>
 
 
-<h2 class="py-4">What about vectors?</h2>
+<h3 class="py-4">What about vectors?</h3>
 
 <p>
 Computer graphics heavily rely on vector math. Vectors serve the fundamental purpose of representing direction. A transformation matrix, being a 3D coordinate system, stores information about rotation. It is possible to obtain the individual axes from the matrix. Conversely, if the directions of all three axes (represented by three perpendicular vectors) are known, a transformation matrix can be constructed from them.
@@ -155,17 +156,14 @@ Computer graphics heavily rely on vector math. Vectors serve the fundamental pur
 <p>As an illustration, to find the Z-axis world direction of an object as an MVector, we multiply a vector (0, 0, 1) by the object's world matrix.</p>
 
 <div class="code-block">
-    <div class="top-bar">Python</div>
-    <pre><code class="language-python">import maya.api.OpenMaya as OpenMaya
+
+    <pre><button class="copy-btn"><i class="fas fa-copy"></i></button><code class="language-python">import maya.api.OpenMaya as OpenMaya
 
 world_matrix = dag_path.inclusiveMatrix() # get world matrix from an object DagPath
 axis = OpenMaya.MVector(0,0,1) # define which axis we want to find in World Space
 
 axis_vector = axis * world_matrix</code></pre>
-    <div class="bottom-bar">
-        <span class="title">Finding a world Z-axis of an object</span>
-        <button class="copy-btn">Copy</button>
-    </div>
+
 </div>
 
 <p>To generate a transformation matrix (rotation matrix only) from three known vectors, it is necessary that the vectors be mutually perpendicular.  It is important to note that if the vectors are not strictly perpendicular, the result will be an object with a skewed geometry.</p>
@@ -176,8 +174,7 @@ axis_vector = axis * world_matrix</code></pre>
 
 
 <div class="code-block">
-    <div class="top-bar">Python</div>
-    <pre><code class="language-python">import maya.api.OpenMaya as OpenMaya
+    <pre><button class="copy-btn"><i class="fas fa-copy"></i></button><code class="language-python">import maya.api.OpenMaya as OpenMaya
 # ...
 # we have 3 vectors - aim, up and normal, all in world space and mutually perpendicular
 matrix = OpenMaya.MMatrix((
@@ -188,13 +185,9 @@ matrix = OpenMaya.MMatrix((
 ))
 
 transformation_matrix = om.MTransformationMatrix(matrix)</code></pre>
-    <div class="bottom-bar">
-        <span class="title">Generating a transformation matrix from three known vectors</span>
-        <button class="copy-btn">Copy</button>
-    </div>
 </div>
 
-<h2 class="py-4">Maya and Matrices</h2>
+<h3 class="py-4">Maya and Matrices</h3>
 
 <p>In Maya, there are numerous methods to manipulate matrices. Although a certain degree of programming and mathematical proficiency is required to work with matrices directly, Maya offers various options for programmers to utilize matrices in tools for artists.</p>
 
@@ -236,10 +229,10 @@ In addition to nodes, Maya offers API to perform matrix and vector operations an
   <li><b>MFnTransform</b> is a class that provides access to transform nodes in Maya. It allows us to directly modify the transformations of objects. MFnTransform only works with MTransformationMatrix.</li>
 </ul>
 
+<p>Let's see how we can optain and update object matrices:</p>
 
 <div class="code-block">
-    <div class="top-bar">Python</div>
-    <pre><code class="language-python">import maya.api.OpenMaya as OpenMaya
+    <pre><button class="copy-btn"><i class="fas fa-copy"></i></button><code class="language-python">import maya.api.OpenMaya as OpenMaya
 
 selection_list = OpenMaya.MSelectionList()
 selection_list.add("pCube1")
@@ -252,18 +245,12 @@ world_matrix = dag_path.inclusiveMatrix()
 transform_matrix = OpenMaya.MTransformationMatrix(world_matrix)
 transform_fn = OpenMaya.MFnTransform(dag_path) # get access to Transform node of pCube1
 transform_fn.setTransformation(transform_matrix) # apply that transformation matrix to pCube1 transform node</code></pre>
-    <div class="bottom-bar">
-        <span class="title">Optain and update object matrices</span>
-        <button class="copy-btn">Copy</button>
-    </div>
 </div>
 
 
-<h2 class="py-4">Examples</h2>
+<h3 class="py-4">Examples</h3>
 
-<div class="alert alert-secondary fw-light" role="alert">
-  <p>In this part I omitted some unnecessary code. Think of it as a pseudocode that demonstrates the logical steps to achieve some specific results. If you don't know how to use Maya Python API, what are iterators and DagPath, I would suggest learning it first. However, on GitHub you will find full versions of the code samples.</p>
-</div>
+<p>In this part I omitted some unnecessary code. Think of it as a pseudocode that demonstrates the logical steps to achieve some specific results. If you don't know how to use Maya Python API, what are iterators and DagPath, I would suggest learning it first. However, on GitHub you will find full versions of the code samples.</p>
 
 <h5>Match objects</h5>
 
@@ -272,8 +259,7 @@ We'll start with a simple task. We will take a world matrix of one object and ap
 </p>
 
 <div class="code-block">
-    <div class="top-bar">Python</div>
-    <pre><code class="language-python">import maya.api.OpenMaya as OpenMaya
+    <pre><button class="copy-btn"><i class="fas fa-copy"></i></button><code class="language-python">import maya.api.OpenMaya as OpenMaya
 
 # find Cube world matrix
 world_matrix = dag_path_cube.inclusiveMatrix() # get World Matrix of the 1st object. Returns MMatrix
@@ -282,10 +268,6 @@ transformation_matrix = OpenMaya.MTransformationMatrix(world_matrix) # convert M
 # set this matrix to Cone
 fn_transform = OpenMaya.MFnTransform(dag_path_cone) # wrap the 2nd object with MFnTransform class
 fn_transform.setTransformation(world_matrix) # MFnTransform class allows us apply transformation matrix to an object</code></pre>
-    <div class="bottom-bar">
-        <span class="title">Match objects matrices</span>
-        <button class="copy-btn">Copy</button>
-    </div>
 </div>
 
 <h5>Move an object along a local axis of another object</h5>
@@ -296,8 +278,7 @@ We have a <b>Cone</b> object located in space. We will extract the local Y-axis 
 
 
 <div class="code-block">
-    <div class="top-bar">Python</div>
-    <pre><code class="language-python">"""
+    <pre><button class="copy-btn"><i class="fas fa-copy"></i></button><code class="language-python">"""
 Get an offset vector that is based on Y axis and an offset distance value
 """
 import maya.api.OpenMaya as OpenMaya
@@ -307,10 +288,6 @@ offset_distance = 3 # Distance to move along
 vector = OpenMaya.MVector(0,1,0) * cone_matrix # Cone Y vector in world space
 vector.normalize() # set its length to 1
 offset = vector * offset_distance # we receive an offset vector that stores a direction and the offset distance</code></pre>
-    <div class="bottom-bar">
-        <span class="title">Move an object along a local axis of another object</span>
-        <button class="copy-btn">Copy</button>
-    </div>
 </div>
 
 We have 3 ways to move an object along a vector:
@@ -325,8 +302,7 @@ Let's check the third option. All options samples can be found on GitHub.
 
 
 <div class="code-block">
-    <div class="top-bar">Python</div>
-    <pre><code class="language-python">""" We move the Cube along the Y vector from the center of the Cone and orient it in the same way as the Cone."""
+    <pre><button class="copy-btn"><i class="fas fa-copy"></i></button><code class="language-python">""" We move the Cube along the Y vector from the center of the Cone and orient it in the same way as the Cone."""
 
 # We should set Cone scale values back to (1,1,1), otherwise our cube will inherit the scale as well
 # We just want it to inherit translation and rotation
@@ -338,20 +314,15 @@ pos = tMatrix.translation(OpenMaya.MSpace.kWorld) # get position values from it 
 pos = pos + offset # modifi the position
 tMatrix.setTranslation(pos, OpenMaya.MSpace.kWorld) # set the position back to transformation matrix
 fnTransform.setTransformation(tMatrix) # apply transformation matrix to the Cube transform</code></pre>
-    <div class="bottom-bar">
-        <span class="title">Move the Cube along the Y vector from the Cone's original position and orient it in the same way as the Cone.</span>
-        <button class="copy-btn">Copy</button>
-    </div>
 </div>
 
-<h5 class="py-4">Rotate one object around a local axis of another object</h5>
+<h5>Rotate one object around a local axis of another object</h5>
 
 <p>The idea in this example is to rotate a random object around any of 3 local axes of another object. We will rotate a Cube around a Cone Y axis.</p>
 
 
 <div class="code-block">
-    <div class="top-bar">Python</div>
-    <pre><code class="language-python"># we want to rotate this object
+    <pre><button class="copy-btn"><i class="fas fa-copy"></i></button><code class="language-python"># we want to rotate this object
 mCube = dpCube.inclusiveMatrix() # get world matrix
 # around this object
 mCone = dpCone.inclusiveMatrix() # get world matrix
@@ -373,14 +344,10 @@ tmCube = om.MTransformationMatrix(matrix)
 # apply matrix to cube
 fnTrCube = om.MFnTransform(dpCube)
 fnTrCube.setTransformation(tmCube)</code></pre>
-    <div class="bottom-bar">
-        <span class="title">Rotate one object around a local axis of another object</span>
-        <button class="copy-btn">Copy</button>
-    </div>
 </div>
 
 
-<h5 class="py-4">Place object on a face of another object</h5>
+<h5>Place object on a face of another object</h5>
 
 <p>I like this example because it functions similarly to the <b>Rivet</b> constraint. The concept involves positioning an object onto a face of another object and orienting it in such a way that it aligns with the face's direction.</p>
 
@@ -393,8 +360,7 @@ fnTrCube.setTransformation(tmCube)</code></pre>
 <p>Suppose that we want to align a locator onto one of the Cube's faces. Here is a sequence of steps that we can follow to ensure that our script operates as intended:</p>
 
 <div class="code-block">
-    <div class="top-bar">Python</div>
-    <pre><code class="language-python">face_id = "4" # face index
+    <pre><button class="copy-btn"><i class="fas fa-copy"></i></button><code class="language-python">face_id = "4" # face index
 
 # create Faces iterator and set index "face_idx" so we work only with that face
 face_iter = OpenMaya.MItMeshPolygon(dag_path)
@@ -432,8 +398,4 @@ output_matrix = OpenMaya.MMatrix((
 transform_matrix = OpenMaya.MTransformationMatrix(output_matrix) # convert MMatrix to MTransformationMatrix
 
 locator_transform_fn.setTransformation(transform_matrix) # apply transformation matrix to locator</code></pre>
-    <div class="bottom-bar">
-        <span class="title">Place an object on a face of another object</span>
-        <button class="copy-btn">Copy</button>
-    </div>
 </div>

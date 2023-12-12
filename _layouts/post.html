@@ -8,7 +8,7 @@ layout: default
     <div class="container pt-5">
         <h1 class="post-title text-center py-2 fs-1 fw-light">{{ page.title }}</h1>
         <ul class="list-inline text-center fw-light text-muted">
-            <li class="list-inline-item"><p>{{ page.date |  date: "%B %d, %Y"}}</p></li>
+            <li class="list-inline-item"><p>{{ page.date |  date: "%B %d, %Y"}} | <a target="_blank" href={{page.github}}>GitHub</a></p></li>
             <!-- {% for tag in page.tags%}
                 <li class="list-inline-item"><h6>#{{tag}}</h6></li>date_to_string
             {% endfor %} -->

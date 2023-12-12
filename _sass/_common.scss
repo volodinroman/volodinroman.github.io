@@ -1,46 +1,43 @@
-body, html{
-    /* line-height: 1.8; */
-    // font-family: 'Open Sans', sans-serif;
-    font-family: "Inter","sans-serif";
-    // font-family: Google Sans,Helvetica Neue,sans-serif;
-    // font-family: "Segoe UI Web (West European)",Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
-    font-weight:400;
+body, html {
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     font-style: normal;
-    // line-height: 28px;
     line-height: 1.5em;
-    // font-family: Helvetica, Arial, sans-serif;
     height: 100%;
 
-    /* For Firefox */
-    scrollbar-width: thin; /* or "auto" or "thin" */
-    scrollbar-color: #555 #333; /* thumb and track colors */
+    /* Scrollbar styles for Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #888 #333;
 }
 
-a {outline: none;}
-a:link {text-decoration: none;color:inherit;}
-a:visited {text-decoration:none;color:inherit;}
-a:hover {text-decoration: none;color:inherit;}
-a:active {text-decoration: none;color:inherit;}
+/* Anchor tag styles */
+a { 
+    outline: none;
+}
+a:link, a:visited, a:hover, a:active { 
+    text-decoration: none; 
+    color: inherit; 
+}
 
-.cursor-default:hover{
+/* Cursor style */
+.cursor-default:hover {
     cursor: default !important;
 }
 
-
-/* This styles the scrollbar track */
+/* WebKit scrollbar styles */
+/* Scrollbar track */
 ::-webkit-scrollbar-track {
-    background-color: #333; /* The track color should match the background color of the container */
+    background-color: #333;
 }
 
-/* This styles the scrollbar thumb */
+/* Scrollbar thumb */
 ::-webkit-scrollbar-thumb {
-    background-color: #888; /* The thumb color, can be any color */
-    border-radius: 10px; /* Makes the thumb's corners rounded */
-    border: 3px solid #333; /* Same color as the scrollbar track for the "groove" effect */
+    background-color: #888;
+    border-radius: 10px;
+    border: 3px solid #333;
 }
 
-/* This styles the scrollbar itself (width, etc.) */
+/* Scrollbar width */
 ::-webkit-scrollbar {
-    width: 12px; /* The width of the scrollbar */
+    width: 12px;
 }

@@ -1,4 +1,3 @@
-
 // Blog
 
 #blog .post-list-item {
@@ -15,18 +14,24 @@
 }
 
 
+
+
 // Post
 
-.post-body p{
-    color:#333333;
+.post-body{
+    color:#555;
     font-size: 18px;
-    line-height: 28px;
+    line-height: 30px;
 }
 
-.post-body ul{
-    color:#333333;
-    font-size: 18px;
-    line-height: 28px;
+.post-body a {
+    // color: #43b5f7; /* Adjust color as needed */
+    text-decoration: none;
+}
+
+.post-body a:hover {
+    // color: #bdceeb; /* Hover state color */
+    text-decoration: underline;
 }
 
 #post-content h2{
@@ -35,6 +40,15 @@
     font-weight: 400;
 }
 
+#post-content h5{
+    line-height: 36px;
+    font-weight: 600;
+}
+
 #post-content .alert p{
     margin: 0px !important;
+}
+
+#post-title a:hover{
+    text-decoration: underline !important;
 }
