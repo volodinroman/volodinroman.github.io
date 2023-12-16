@@ -3,11 +3,19 @@
 
 .navbar-brand{
     font-size:26px;
-    font-weight: 400;
-    color: #888888 !important;
+    font-weight: 300;
+    color: #000000 !important;
+    display: flex;
+    align-items: center;
 }
 .navbar-brand:hover{
     color: #000000 !important;
+}
+
+.navbar-brand img {
+    height: 1.5em; /* Adjust this value as needed */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Adjust the spacing between the logo and text */
 }
 
 .navbar {
