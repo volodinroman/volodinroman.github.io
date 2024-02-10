@@ -1,16 +1,61 @@
-body, html {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    line-height: 1.5em;
-    height: 100%;
+@font-face {
+    font-family: 'Hyperlegible';
+    src: url('../fonts/Atkinson-Hyperlegible-Regular-102a.woff2') format('woff2');
+}
 
+@media (min-width: 1024px) {
+    body {
+        margin: 0 0 0 0;
+        padding: .75rem;
+    }
+    .container{
+        padding: 0rem 0rem;
+        // background-color: red;
+    }
+    .container-fluid{
+        border-radius: .4rem .4rem;
+        padding-bottom: 0px !important;
+    }
+
+}
+
+@media (max-width: 1023px) {
+    body {
+        margin: 0 0 0 0;
+        padding: 0;
+    }
+    .container{
+        padding: 1rem 1rem;
+        // background-color: red;
+    }
+    .container-fluid{
+        border-radius: 0rem 0rem;
+    }
+}
+
+body{
+    background-color: #dce0e7; 
+    font-family: 'Hyperlegible', sans-serif;
+    // letter-spacing: 1px;
     /* Scrollbar styles for Firefox */
     scrollbar-width: thin;
     scrollbar-color: #888 #333;
 }
 
-/* Anchor tag styles */
+p, li{
+    font-size: 1.25rem;
+}
+
+
+.container-fluid {
+    min-height: 100vh;
+    background-color: #f9fcfc;
+    // background-color: #1b1b1b;
+    padding: 0 0 1rem 0;
+}
+
+
+// links
 a { 
     outline: none;
 }
@@ -19,25 +64,26 @@ a:link, a:visited, a:hover, a:active {
     color: inherit; 
 }
 
-/* Cursor style */
+// cursor
 .cursor-default:hover {
     cursor: default !important;
 }
 
-/* WebKit scrollbar styles */
-/* Scrollbar track */
+// Vertical Scroll Bar
 ::-webkit-scrollbar-track {
     background-color: #333;
 }
 
-/* Scrollbar thumb */
 ::-webkit-scrollbar-thumb {
-    background-color: #888;
+    background-color: #aaa;
     border-radius: 10px;
     border: 3px solid #333;
 }
 
-/* Scrollbar width */
 ::-webkit-scrollbar {
     width: 12px;
 }
+
+
+
+

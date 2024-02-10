@@ -32,7 +32,7 @@ pre code.hljs {
 
 .copy-btn i {
     font-size: 16px; /* Adjust icon size as needed */
-    color: #000; /* Adjust icon color as needed */
+    color: #d9d9d9; /* Adjust icon color as needed */
 }
 
 pre:hover .copy-btn {
@@ -44,21 +44,22 @@ pre:hover .copy-btn {
 .code-block {
     // background: #333; /* Adjust to match your theme */
     border-radius:6px;
-    margin: 26px 0;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
     overflow: hidden; /* For border-radius on child elements */
-    border: solid #dedede 1px;
+    // border: solid #dedede 1px;
 }
 
-.top-bar,
-.bottom-bar {
-    background: #eee; /* Contrast with code block */
-    color: rgb(174, 174, 174);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.1em 1em;
-    font-size: 0.80em;
-}
+// .top-bar,
+// .bottom-bar {
+//     background: #eee; /* Contrast with code block */
+//     color: rgb(174, 174, 174);
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding: 0.1em 1em;
+//     font-size: 0.80em;
+// }
 
 // .top-bar {
 //     border-bottom: 1px solid #555;

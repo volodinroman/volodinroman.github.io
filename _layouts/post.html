@@ -2,34 +2,15 @@
 layout: default
 ---
 
-
-<!-- Post Title -->
-<section id="post-title" class="bg-white text-dark py-5">
-    <div class="container pt-5">
-        <h1 class="post-title text-center py-2 fs-1 fw-light">{{ page.title }}</h1>
-        <ul class="list-inline text-center fw-light text-muted">
-            <li class="list-inline-item"><p>{{ page.date |  date: "%B %d, %Y"}} | <a target="_blank" href={{page.github}}>GitHub</a></p></li>
-            <!-- {% for tag in page.tags%}
-                <li class="list-inline-item"><h6>#{{tag}}</h6></li>date_to_string
-            {% endfor %} -->
-        </ul>
-        
-    </div>
-    
-</section>
-
-
-<!-- Post Content -->
-<section id="post-content" class="bg-white text-dark py-2">
-    <div class="container post-body  fill-viewport-70 pb-5">
-        <!-- <article class="post-content"> -->
-            <hr>
-            <div class="row">
-                <div class="col-0"></div>
-                <div class="col-12">{{ content }}</div>
-                <div class="col-0 "></div>
-            </div>
-          
-        <!-- </article> -->
+<section class="post-body bg-cross padding-up-5">
+    <div class="container bg-content font-grey-800 text-center">
+        <h1 class="font-weight-700 font-grey-900 display-4">{{ page.title }}</h1>
+        <p>{{ page.date |  date: "%B %d, %Y"}} | <a target="_blank" href={{page.github}}>GitHub</a></p>
+        <hr>
     </div>
 </section>
+
+{{ content }}
+
+<div class="bg-content padding-bottom-3"></div>
+
