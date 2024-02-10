@@ -10,13 +10,11 @@
     }
     .container{
         padding: 0rem 0rem;
-        // background-color: red;
     }
     .container-fluid{
         border-radius: .4rem .4rem;
         padding-bottom: 0px !important;
     }
-
 }
 
 @media (max-width: 1023px) {
@@ -26,7 +24,6 @@
     }
     .container{
         padding: 1rem 1rem;
-        // background-color: red;
     }
     .container-fluid{
         border-radius: 0rem 0rem;
@@ -34,23 +31,21 @@
 }
 
 body{
-    background-color: #dce0e7; 
-    font-family: 'Hyperlegible', sans-serif;
-    // letter-spacing: 1px;
+    background-color: $website-body-background; 
+    font-family: $content-font-family;
     /* Scrollbar styles for Firefox */
     scrollbar-width: thin;
     scrollbar-color: #888 #333;
 }
 
 p, li{
-    font-size: 1.25rem;
+    font-size: $content-font-size;
 }
 
 
 .container-fluid {
     min-height: 100vh;
-    background-color: #f9fcfc;
-    // background-color: #1b1b1b;
+    background-color: $content-background-color;
     padding: 0 0 1rem 0;
 }
 
