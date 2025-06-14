@@ -9,5 +9,6 @@ _site
 .vscode
 .idea
 .archive
+/vendor/
 2022-01-04-Vectors.md
 math_vectors
