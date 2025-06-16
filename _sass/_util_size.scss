@@ -1,32 +1,35 @@
-// Width and Size
-.max-width-full{
-    width: 100%;
+@mixin size-utility($property, $value) {
+    #{$property}: $value;
+}
+
+.max-width-full {
+    @include size-utility(width, 100%);
 }
 
 .max-width-800 {
-    max-width: 800px !important;
+    @include size-utility(max-width, 800px);
 }
 
 .max-width-1000 {
-    max-width: 1000px !important;
+    @include size-utility(max-width, 1000px);
 }
 
 .max-width-1200 {
-    max-width: 1200px !important;
+    @include size-utility(max-width, 1200px);
 }
 
 .vh-70 {
-    min-height: 70vh;
+    @include size-utility(min-height, 70vh);
 }
 
 .vh-80 {
-    min-height: 80vh;
+    @include size-utility(min-height, 80vh);
 }
 
 .vh-90 {
-    min-height: 90vh;
+    @include size-utility(min-height, 90vh);
 }
 
 .vh-100 {
-    min-height: 1000px;
+    @include size-utility(min-height, 1000px);
 }

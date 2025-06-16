@@ -3,49 +3,49 @@
     src: url('../fonts/Atkinson-Hyperlegible-Regular-102a.woff2') format('woff2');
 }
 
+@mixin responsive-container($padding, $border-radius) {
+    padding: $padding;
+    border-radius: $border-radius;
+}
+
 @media (min-width: 1024px) {
     body {
-        margin: 0 0 0 0;
-        padding: .75rem;
+        margin: 0;
     }
-    .container{
-        padding: 0rem 0rem;
+    .container {
+        @include responsive-container(0, 0);
     }
-    .container-fluid{
-        border-radius: .4rem .4rem;
-        padding-bottom: 0px !important;
+    .container-fluid {
+        @include responsive-container(0, 0.4rem);
     }
 }
 
 @media (max-width: 1023px) {
     body {
-        margin: 0 0 0 0;
-        padding: 0;
+        margin: 0;
     }
-    .container{
-        padding: 1rem 1rem;
+    .container {
+        @include responsive-container(1rem, 0);
     }
-    .container-fluid{
-        border-radius: 0rem 0rem;
+    .container-fluid {
+        @include responsive-container(1rem, 0);
     }
 }
 
-body{
-    background-color: $website-body-background; 
-    font-family: $content-font-family;
-    /* Scrollbar styles for Firefox */
+body {
+    background-color: $color-elevenslab-grey;
+    font-family: $font-family-content;
     scrollbar-width: thin;
     scrollbar-color: #888 #333;
 }
 
-p, li{
-    font-size: $content-font-size;
+p, li {
+    font-size: $font-size-content;
 }
-
 
 .container-fluid {
     min-height: 100vh;
-    background-color: $content-background-color;
+    background-color: $color-elevenslab-light;
     padding: 0 0 1rem 0;
 }
 
@@ -78,7 +78,6 @@ a:link, a:visited, a:hover, a:active {
 ::-webkit-scrollbar {
     width: 12px;
 }
-
 
 
 

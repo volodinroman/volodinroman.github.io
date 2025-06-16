@@ -1,20 +1,14 @@
-//colors
-$jetbrain-dark: #1a1b1e;
-$elevenlabs-light: #f9fcfc;
-$elevenlabs-grey: #dce0e7;
-$footer-dark: #5c5d5e;
+// Colors
+$color-jetbrain-dark: #1a1b1e; // Dark theme background
+$color-elevenslab-light: #f9fcfc; // Light theme background
+$color-elevenslab-grey: #dce0e7; // Grey background
+$color-footer-dark: #5c5d5e; // Footer text color
+$color-footer-dark-lighten: lighten($color-footer-dark, 20%); // Footer hover color
+$color-navbar-text: #000000; // Navbar text color
+$color-navbar-hover: lighten($color-navbar-text, 20%); // Navbar hover color
 
+// Fonts
+$font-family-content: 'Hyperlegible', sans-serif; // Main content font
+$font-size-content: 1.25rem; // Content font size
+$font-size-footer-copyright: 1rem; // Footer copyright font size
 
-
-
-// primary vars
-$website-body-background: $elevenlabs-grey;
-$content-background-color: $elevenlabs-light;
-$content-font-family: 'Hyperlegible', sans-serif;
-
-//footer
-$footer-font-color: $footer-dark;
-$footer-copyright-font-size: 1rem;
-
-//size 
-$content-font-size: 1.25rem;

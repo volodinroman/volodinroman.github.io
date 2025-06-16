@@ -1,0 +1,28 @@
+.navbar-brand{
+    font-size:26px;
+    font-weight: 400;
+    color: $color-navbar-text !important;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand:hover{
+    color: $color-navbar-text !important;
+}
+
+.navbar-brand img {
+    height: 1.5em; /* Adjust this value as needed */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Adjust the spacing between the logo and text */
+}
+
+.navbar {
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+.navbar-nav  li a:hover {
+    color: $color-navbar-hover !important;
+    
+}

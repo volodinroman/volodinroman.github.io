@@ -1,23 +1,19 @@
-/* FOOTER */
-
-footer{
+footer {
     min-height: 10rem;
 }
- 
-.copyright:before{
-	color: $footer-font-color;
-    content: "Copyright © 2024 Roman Volodin";
-    font-size: $footer-copyright-font-size;
+
+.copyright:before {
+    color: $color-footer-dark;
+    content: "Copyright © 2025 Roman Volodin";
+    font-size: $font-size-footer-copyright;
 }
 
-.social-wrapper{
+.social-wrapper {
     cursor: default;
 }
 
-// .fa-flag{
-//     color: rgb(148, 148, 148) !important;
-// }
-
-.fa-flag:hover {
-    color: #6c6c6c !important; 
+.fa-flag {
+    &:hover {
+        color: $color-footer-dark-lighten; // Use a variable for hover color
+    }
 }
